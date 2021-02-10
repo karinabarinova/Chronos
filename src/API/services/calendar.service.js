@@ -48,21 +48,27 @@ async function create(params, creator) {
     return await db.Calendar.create(params);
 }
 
-async function update(params, id) {
+async function update(params, id, creator) {
     const exists = await db.Calendar.findOne({ where: {name: params.name}})
     if (exists)
         throw 'Calendar already exists'
     const calendar = await getCalendar(id);
 
-    Object.assign(calendar, params);
-    await calendar.save();
-
-    return calendar.get()
+    if (calendar.creator === creator) {
+        Object.assign(calendar, params);
+        await calendar.save();
+    
+        return calendar.get()
+    }
+    throw 'Unauthorized'
 }
 
-async function _delete(id) {
+async function _delete(id, creator) {
     const calendar = await getCalendar(id);
-    await calendar.destroy();
+    if (calendar.creator === creator)
+        await calendar.destroy();
+    else
+        throw 'Unauthorized'
 
 }
 

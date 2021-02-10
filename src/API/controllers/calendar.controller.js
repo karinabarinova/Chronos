@@ -38,8 +38,8 @@ function createSchema(req, res, next) {
     const schema = Joi.object({
         name: Joi.string().empty('').required(),
         description: Joi.string().empty(''),
-        color: Joi.string().empty('') .required(),
-        participans: Joi.string().empty('')
+        color: Joi.string().empty('').required(),
+        participants: Joi.string().empty('')
     })
     validateRequest(req, next, schema)
 }
@@ -52,20 +52,22 @@ function create(req, res, next) {
 
 function updateSchema(req, res, next) {
     const schema = Joi.object({
-        title: Joi.string().empty(''),
-        description: Joi.string().empty(''),
+        name: Joi.string().empty(''),
+		description: Joi.string().empty(''),
+		color: Joi.string().empty(''),
+		participants: Joi.string().empty('')
     })
     validateRequest(req, next, schema)
 }
 
 function update(req, res, next) {
-    calendarService.update(req.body, req.params.id)
+    calendarService.update(req.body, req.params.id, req.user.id)
         .then((data) => res.json({ message: "Calendar updated successfully", data}))
         .catch(next)
 }
 
 function _delete(req, res, next) {
-    calendarService.delete(req.params.id)
+    calendarService.delete(req.params.id, req.user.id)
         .then(() => res.json({message: "Calendar deleted successfully"}))
         .catch(next)
 }
