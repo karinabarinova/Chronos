@@ -30,11 +30,6 @@ function model(sequelize) {
             type: DataTypes.STRING,
             allowNull: true
         },
-        rating: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0
-        },
         role: {
             type: DataTypes.STRING,
             allowNull: false
