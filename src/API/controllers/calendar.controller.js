@@ -38,13 +38,14 @@ function createSchema(req, res, next) {
     const schema = Joi.object({
         name: Joi.string().empty('').required(),
         description: Joi.string().empty(''),
-        color: Joi.string().empty('') .required()
+        color: Joi.string().empty('') .required(),
+        participans: Joi.string().empty('')
     })
     validateRequest(req, next, schema)
 }
 
 function create(req, res, next) {
-    calendarService.create(req.body)
+    calendarService.create(req.body, req.user.id)
         .then((data) => res.json({ message: "Calendar Creation successful", data}))
         .catch(next)
 }

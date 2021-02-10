@@ -35,7 +35,10 @@ async function getAllEvents(id) {
     return events[0].events
 }
 
-async function create(params) {
+async function create(params, creator) {
+    params.canDelete = true;
+    params.canHide = true;
+    params.creator = creator;
     const exists = await db.Calendar.findOne({ where: {name: params.name}})
     if (exists)
         throw 'Calendar already exists'
