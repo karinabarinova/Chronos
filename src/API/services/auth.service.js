@@ -73,6 +73,7 @@ async function verifyEmail({ token }) {
     user.verified = Date.now();
     user.verificationToken = null;
     await user.save();
+    await createDefaultCalendar(user.id, user.fullName)
 }
 
 async function forgotPassword({ email }, origin) {
@@ -191,4 +192,16 @@ async function logOut(id, {token}) {
         throw "Invalid token in cookies"
     row.expires = new Date(Date.now())
     await row.save()
+}
+
+async function createDefaultCalendar(id, name) {
+    const params = {
+        creator: id,
+        name,
+        description: `${name}'s calendar`,
+        color: "#4f9eb8",
+        canDelete: false,
+        canHide: false
+    }
+    const calendar = await db.Calendar.create(params);
 }

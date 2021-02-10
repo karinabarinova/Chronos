@@ -4,8 +4,8 @@ const Role = require('../helpers/role')
 
 module.exports = {
     getAll,
-    getAllPosts,
-    getAllComments,
+    // getAllPosts,
+    // getAllComments,
     getById,
     create,
     update,
