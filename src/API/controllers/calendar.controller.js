@@ -17,13 +17,13 @@ router.patch('/:id', authorize(), updateSchema, update) //update calendar
 router.delete('/:id', authorize(), _delete) //delete calendar
 
 function getAll(req, res, next) {
-    calendarService.getAll()
+    calendarService.getAll(req.user.id)
         .then(data => res.json(data))
         .catch(next);
 }
 
 function getById(req, res, next) {
-    calendarService.getById(req.params.id)
+    calendarService.getById(req.params.id, req.user.id)
         .then(data => res.json(data))
         .catch(next);
 }

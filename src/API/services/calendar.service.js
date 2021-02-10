@@ -9,13 +9,16 @@ module.exports = {
     delete: _delete
 };
 
-async function getAll() {
-    const calendars = await db.Calendar.findAll()
+async function getAll(creator) {
+    const calendars = await db.Calendar.findAll( {where: { creator }} )
     return calendars
 }
 
-async function getById(id) {
-    return await getCalendar(id)
+async function getById(id, creator) {
+    const calendar = await getCalendar(id)
+    if (calendar.creator === creator)
+        return calendar
+    throw 'Calendar not found'
 }
 
 async function getAllEvents(id) {
