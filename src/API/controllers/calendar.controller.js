@@ -28,8 +28,8 @@ function getById(req, res, next) {
         .catch(next);
 }
 
-function getAllPosts(req, res, next) {
-    calendarService.getAllPosts(req.params.id)
+function getAllEvents(req, res, next) {
+    calendarService.getAllEvents(req.params.id)
         .then(data => res.json(data))
         .catch(next);
 }
