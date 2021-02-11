@@ -1,5 +1,5 @@
-import React from 'react'
-import {SignUp} from '../../components';
+import React, { useState } from 'react'
+import {SignUp, FormSuccessSignIn} from '../../components';
 import { 
     FormContainer,
     CloseButton,
@@ -10,13 +10,23 @@ const image = require('../../images/signup.svg').default
 
 
 const Register = () => {
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    function submitForm() {
+        setIsSubmitted(true);
+    }
+
     return (
         <FormContainer>
             <CloseButton>x</CloseButton>
             <FormContentLeft>
                 <FormImage src={image} alt="" />
             </FormContentLeft>
-            <SignUp />
+            {!isSubmitted ? (
+                <SignUp submitForm={submitForm} />
+            ) : (
+                <FormSuccessSignIn />
+            )}
         </FormContainer>
     )
 }

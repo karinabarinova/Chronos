@@ -5,13 +5,15 @@ import {
     FormImage2
 } from './Form.elements'
 
-const FormSuccess = () => {
+const image = require('../../images/welcome.svg').default
+
+const FormSuccessSignIn = () => {
   return (
     <FormContentRight>
       <FormSuccess>We have received your request!</FormSuccess>
-      <FormImage2 src='../images/welcome.svg' alt='success-image' />
+      <FormImage2 src={image} alt='success-image' />
     </FormContentRight>
   );
 };
 
-export default FormSuccess;
+export default FormSuccessSignIn;
