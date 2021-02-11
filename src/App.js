@@ -10,6 +10,7 @@ import SingUp from './containers/SingUp/SingUp';
 import ScrollToTop from './components/scrollToTop';
 import SingIn from './containers/SignIn/SingIn';
 import ResetPassword from './containers/ResetPassword/ResetPassword';
+import ResetPasswordValidate from './containers/ResetPassword/ResetPasswordValidate'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/sign-up" exact component={SingUp} />
         <Route path="/sign-in" exact component={SingIn} />
         <Route path="/reset-password" exact component={ResetPassword} />
+        <Route path="/reset-password-confirm" exact component={ResetPasswordValidate} />
       </Switch>
       <Footer />
       {/* <Switch></Switch> */}
