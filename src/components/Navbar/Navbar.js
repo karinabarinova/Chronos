@@ -12,7 +12,8 @@ import {
     NavItem,
     NavLink,
     NavItemBtn,
-    NavBtnLink
+    NavBtnLink,
+    NavBtnContainer
 } from './Navbar.elements';
 
 const Navbar = () => {
@@ -57,16 +58,23 @@ const Navbar = () => {
                             </NavItem>
                             <NavItemBtn>
                                 {button ? (
-                                    <NavBtnLink to="/sign-up">
-                                        <Button>SIGN UP</Button>
-                                    </NavBtnLink>
+                                    <NavBtnContainer>
+                                        <NavBtnLink to="/sign-up">
+                                            <Button>SIGN UP</Button>
+                                        </NavBtnLink>
+                                        <NavBtnLink to="/sign-in">
+                                            <Button>SIGN IN</Button>
+                                        </NavBtnLink>
+                                    </NavBtnContainer>
                                 ) : (
-                                    <NavBtnLink to="/sign-up">
-                                        <Button 
-                                            // onClick={closeMobileMenu}
-                                            fontBig primary
-                                            >SIGN UP</Button>
-                                    </NavBtnLink>
+                                    <NavBtnContainer>
+                                        <NavBtnLink to="/sign-up">
+                                            <Button fontBig primary>SIGN UP</Button>
+                                        </NavBtnLink>
+                                        <NavBtnLink to="/sign-in">
+                                            <Button fontBig primary>SIGN IN</Button>
+                                        </NavBtnLink>
+                                    </NavBtnContainer>
                                 )}
                             </NavItemBtn>
                         </NavMenu>

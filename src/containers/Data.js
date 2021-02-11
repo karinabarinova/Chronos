@@ -10,7 +10,7 @@ export const homeObjOne = {
     lightText: true, 
     topLine: 'Marketing Agency',
     start: '',
-    img: require('../../images/svg-1.svg').default,
+    img: require('../images/svg-1.svg').default,
     alt: 'Image'
 }
 
@@ -26,7 +26,7 @@ export const homeObjTwo = {
     lightText: false, 
     topLine: 'Marketing Agency',
     start: 'true',
-    img: require('../../images/svg-2.svg').default,
+    img: require('../images/svg-2.svg').default,
     alt: 'Image'
 }
 
@@ -42,7 +42,7 @@ export const homeObjThree = {
     lightText: true, 
     topLine: 'Marketing Agency',
     start: '',
-    img: require('../../images/svg-3.svg').default,
+    img: require('../images/svg-3.svg').default,
     alt: 'Image'
 }
 
@@ -58,6 +58,6 @@ export const homeObjFour = {
     lightText: true, 
     topLine: 'Marketing Agency',
     start: 'true',
-    img: require('../../images/svg-4.svg').default,
+    img: require('../images/svg-4.svg').default,
     alt: 'Image'
 }

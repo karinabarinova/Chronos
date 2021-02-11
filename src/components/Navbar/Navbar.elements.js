@@ -129,3 +129,9 @@ export const NavBtnLink = styled(Link)`
     border: none;
     outline: none;
 `;
+
+export const NavBtnContainer = styled.div`
+    display:flex;
+    flex-direction: column wrap;
+    align-items: center;
+`;
