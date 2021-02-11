@@ -14,7 +14,7 @@ import {
     FormInputButton
 } from './Form.elements';
 
-const FormSignup = ({ submitForm }) => {
+const FormResetPassword = ({ submitForm }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate
@@ -24,19 +24,8 @@ const FormSignup = ({ submitForm }) => {
         <FormContentRight>
             <Form onSubmit={handleSubmit} noValidate>
                 <Heading>
-                Welcome back! Let's nail the day together
+                Provide your email to reset password
                 </Heading>
-                <FormInputs>
-                <FormLabel>Username</FormLabel>
-                <FormInput
-                    type='text'
-                    name='username'
-                    placeholder='Enter your username'
-                    value={values.username}
-                    onChange={handleChange}
-                />
-                {errors.username && <Error>{errors.username}</Error>}
-                </FormInputs>
                 <FormInputs>
                 <FormLabel>Email</FormLabel>
                 <FormInput
@@ -48,29 +37,15 @@ const FormSignup = ({ submitForm }) => {
                 />
                 {errors.email && <Error>{errors.email}</Error>}
                 </FormInputs>
-                <FormInputs>
-                <FormLabel>Password</FormLabel>
-                <FormInput
-                    type='password'
-                    name='password'
-                    placeholder='Enter your password'
-                    value={values.password}
-                    onChange={handleChange}
-                />
-                {errors.password && <Error>{errors.password}</Error>}
-                </FormInputs>
                 <FormInputButton type='submit'>
-                Sign in
+                Submit
                 </FormInputButton>
                 <FormInputLoginSpan>
                 Don't have an accout? Create one <FormInputLoginLink to='/sign-up'>here</FormInputLoginLink>
-                </FormInputLoginSpan>
-                <FormInputLoginSpan>
-                Forgot Password? Let's reset it <FormInputLoginLink to='/reset-password'>here</FormInputLoginLink>
                 </FormInputLoginSpan>
             </Form>
         </FormContentRight>
   );
 };
 
-export default FormSignup;
+export default FormResetPassword;
