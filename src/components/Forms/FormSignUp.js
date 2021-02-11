@@ -2,8 +2,6 @@ import React from 'react';
 import validate from './validateInfo';
 import useForm from './useForm';
 import {
-    FormContainer,
-    CloseButton,
     FormContentRight,
     Form,
     Heading,
@@ -15,7 +13,6 @@ import {
     FormInputLoginLink,
     FormInputButton
 } from './Form.elements';
-// import './Form.css';
 
 const FormSignup = ({ submitForm }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
@@ -40,6 +37,17 @@ const FormSignup = ({ submitForm }) => {
                     onChange={handleChange}
                 />
                 {errors.username && <Error>{errors.username}</Error>}
+                </FormInputs>
+                <FormInputs>
+                <FormLabel>Name</FormLabel>
+                <FormInput
+                    type='text'
+                    name='fullName'
+                    placeholder='Enter your name'
+                    value={values.fullName}
+                    onChange={handleChange}
+                />
+                {errors.fullName && <Error>{errors.fullName}</Error>}
                 </FormInputs>
                 <FormInputs>
                 <FormLabel>Email</FormLabel>
