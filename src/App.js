@@ -7,11 +7,13 @@ import Home from './containers/HomePage/Home';
 import Services from './containers/Services/Services';
 import Products from './containers/Products/Products';
 import SingUp from './containers/SingUp/SingUp';
+import ScrollToTop from './components/scrollToTop';
 
 function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
+      <ScrollToTop />
       <Navbar />
       <Switch>
         <Route path="/" exact component={Home} />
