@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { Container } from '../../globalStyles';
 import { Link } from 'react-router-dom';
-// import { BsFillCalendarFill} from 'react-icons/ai';
 import { FaCalendarAlt } from "react-icons/fa";
 
 
