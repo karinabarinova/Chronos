@@ -103,7 +103,7 @@ export const FormInput = styled.input`
 
     &::placeholder {
         color: #595959;
-        font-size: 12px;
+        font-size: 16px;
     }
 `;
 
