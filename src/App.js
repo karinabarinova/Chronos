@@ -19,7 +19,7 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/services" exact component={Services} />
         <Route path="/products" exact component={Products} />
-        <Route path="/sing-up" exact component={SingUp} />
+        <Route path="/sign-up" exact component={SingUp} />
       </Switch>
       <Footer />
       {/* <Switch></Switch> */}
