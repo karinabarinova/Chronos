@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../globalStyles';
-import { GiCrystalBars } from 'react-icons/gi';
-import { GiCutDiamond, GiRock } from 'react-icons/gi';
+import { GiPodiumWinner } from 'react-icons/gi';
+import { MdBusinessCenter, MdPersonPinCircle } from 'react-icons/md';
 import { IconContext } from 'react-icons/lib';
 import {
   PricingSection,
@@ -28,15 +28,16 @@ function Pricing() {
             <PricingCard to='/sign-up'>
               <PricingCardInfo>
                 <PricingCardIcon>
-                  <GiRock />
+                  <MdPersonPinCircle />
                 </PricingCardIcon>
                 <PricingCardPlan>Starter Pack</PricingCardPlan>
-                <PricingCardCost>$99.99</PricingCardCost>
+                <PricingCardCost>$5.99</PricingCardCost>
                 <PricingCardLength>per month</PricingCardLength>
                 <PricingCardFeatures>
-                  <PricingCardFeature>100 New Users</PricingCardFeature>
-                  <PricingCardFeature>$10,000 Budget</PricingCardFeature>
-                  <PricingCardFeature>Retargeting analytics</PricingCardFeature>
+                  <PricingCardFeature>10 New Users</PricingCardFeature>
+                  <PricingCardFeature>5 Calendars</PricingCardFeature>
+                  <PricingCardFeature>Advanced Recurring Reminders</PricingCardFeature>
+                  <PricingCardFeature>Color Tags</PricingCardFeature>
                 </PricingCardFeatures>
                 <Button primary>Choose Plan</Button>
               </PricingCardInfo>
@@ -44,15 +45,16 @@ function Pricing() {
             <PricingCard to='/sign-up'>
               <PricingCardInfo>
                 <PricingCardIcon>
-                  <GiCrystalBars />
+                  <MdBusinessCenter />
                 </PricingCardIcon>
-                <PricingCardPlan>Gold Rush</PricingCardPlan>
-                <PricingCardCost>$299.99</PricingCardCost>
+                <PricingCardPlan>Entrepreneur Pack</PricingCardPlan>
+                <PricingCardCost>$19.99</PricingCardCost>
                 <PricingCardLength>per month</PricingCardLength>
                 <PricingCardFeatures>
-                  <PricingCardFeature>1000 New Users</PricingCardFeature>
-                  <PricingCardFeature>$50,000 Budget</PricingCardFeature>
-                  <PricingCardFeature>Lead Gen Analytics</PricingCardFeature>
+                  <PricingCardFeature>30 New Users</PricingCardFeature>
+                  <PricingCardFeature>10 Calendars</PricingCardFeature>
+                  <PricingCardFeature>Unlimited Daily Planner</PricingCardFeature>
+                  <PricingCardFeature>Customized Themes</PricingCardFeature>
                 </PricingCardFeatures>
                 <Button primary>Choose Plan</Button>
               </PricingCardInfo>
@@ -60,15 +62,16 @@ function Pricing() {
             <PricingCard to='/sign-up'>
               <PricingCardInfo>
                 <PricingCardIcon>
-                  <GiCutDiamond />
+                  <GiPodiumWinner />
                 </PricingCardIcon>
-                <PricingCardPlan>Diamond Kings</PricingCardPlan>
-                <PricingCardCost>$999.99</PricingCardCost>
+                <PricingCardPlan>Corporate Pack</PricingCardPlan>
+                <PricingCardCost>$29.99</PricingCardCost>
                 <PricingCardLength>per month</PricingCardLength>
                 <PricingCardFeatures>
                   <PricingCardFeature>Unlimited Users</PricingCardFeature>
-                  <PricingCardFeature>Unlimited Budget</PricingCardFeature>
+                  <PricingCardFeature>Unlimited Calendats</PricingCardFeature>
                   <PricingCardFeature>24/7 Support</PricingCardFeature>
+                  <PricingCardFeature>Location Reminders(Mobile)</PricingCardFeature>
                 </PricingCardFeatures>
                 <Button primary>Choose Plan</Button>
               </PricingCardInfo>
