@@ -13,6 +13,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
       </Switch>
+      <Footer />
       {/* <Switch></Switch> */}
     </BrowserRouter>
   );
