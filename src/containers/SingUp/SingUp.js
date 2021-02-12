@@ -32,7 +32,7 @@ const Register = (props) => {
         <FormContainer>
             <CloseButton>x</CloseButton>
             <FormContentLeft>
-                <FormImage src={image} alt="" />
+                <FormImage src={image} alt="Authentication Image" />
             </FormContentLeft>
             {!isSubmitted ? (
                 <SignUp submitForm={submitForm} error={error} />

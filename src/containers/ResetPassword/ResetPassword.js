@@ -23,7 +23,7 @@ const ResetPassword = (props) => {
         <FormContainer>
             <CloseButton>x</CloseButton>
             <FormContentLeft>
-                <FormImage src={image} alt="" />
+                <FormImage src={image} alt="Authentication Image" />
             </FormContentLeft>
             <FormResetPassword submitForm={submitForm} error={error} />
         </FormContainer>

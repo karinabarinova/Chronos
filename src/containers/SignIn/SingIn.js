@@ -35,7 +35,7 @@ class Login extends Component {
             <FormContainer>
                 <CloseButton>x</CloseButton>
                 <FormContentLeft>
-                    <FormImage src={image} alt="" />
+                    <FormImage src={image} alt="Authentication Image" />
                 </FormContentLeft>
                 {!this.state.isSubmitted ? (
                     <SignIn submitForm={this.submitForm} error={error} redirect={authRedirect} />

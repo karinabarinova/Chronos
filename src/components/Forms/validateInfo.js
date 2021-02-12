@@ -1,3 +1,14 @@
+export function validateRegisteredEmail(values) {
+	let errors = {};
+
+	if (!values.token.trim()) {
+		errors.token = "Token required"
+	}
+
+	return errors;
+
+}
+
 export function validateInfoRegistration(values) {
 		let errors = {};
 	
@@ -42,14 +53,6 @@ export function validateInfoLogin(values) {
 		errors.password = 'Password is required';
 
 	return errors;
-}
-
-export function validateRegisteredEmail(values) {
-	let errors = {};
-
-	if (!values.token)
-		errors.token = "Token required"
-
 }
 
 export function validateInfoResetPassword(values) {

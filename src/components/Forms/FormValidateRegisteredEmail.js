@@ -15,10 +15,10 @@ import {
 } from './Form.elements';
 
 const FormValidateRegisteredEmail = ({ submitForm, error }) => {
-  const { handleChange, handleSubmit, values, errors } = useForm(
-    submitForm,
-    validate
-  );
+    const { handleChange, handleSubmit, values, errors } = useForm(
+        submitForm,
+        validate
+    );
 
   return (
         <FormContentRight>
@@ -30,12 +30,13 @@ const FormValidateRegisteredEmail = ({ submitForm, error }) => {
                 <FormInputs>
                     <FormLabel>Verification token</FormLabel>
                     <FormInput
-                        type="text"
-                        name="token"
-                        placeholder='Enter token'
-                        value={values.token}
-                        onChange={handleChange}
+                    type="text"
+                    name="token"
+                    placeholder="Confirmation Token"
+                    value={values.token}
+                    onChange={(e) => handleChange(e)}
                     />
+                
                 {errors.token && <Error>{errors.token}</Error>}
                 </FormInputs>
                 <FormInputButton type='submit'>
@@ -46,7 +47,7 @@ const FormValidateRegisteredEmail = ({ submitForm, error }) => {
                 </FormInputLoginSpan>
             </Form>
         </FormContentRight>
-  );
+  )
 };
 
 export default FormValidateRegisteredEmail;
