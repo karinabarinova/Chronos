@@ -14,6 +14,7 @@ import SingIn from './containers/SignIn/SingIn';
 import ResetPassword from './containers/ResetPassword/ResetPassword';
 import ResetPasswordValidate from './containers/ResetPassword/ResetPasswordValidate'
 import Logout from './containers/Logout/Logout';
+import VerifyEmail from './containers/SingUp/ValidateEmail';
 
 class App extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route path="/services" exact component={Services} />
           <Route path="/products" exact component={Products} />
           <Route path="/sign-up" exact component={SingUp} />
+          <Route path="/verify-email" exact component={VerifyEmail} />
           <Route path="/sign-in" exact component={SingIn} />
           <Route path="/reset-password" exact component={ResetPassword} />
           <Route path="/reset-password-confirm" exact component={ResetPasswordValidate} />

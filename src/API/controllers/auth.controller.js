@@ -37,6 +37,7 @@ function authenticate(req, res, next) {
 }
 
 function registerSchema(req, res, next) {
+    console.log(req.body)
     const schema = Joi.object({
         login: Joi.string().required(),
         password: Joi.string().min(7).required(),

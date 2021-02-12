@@ -14,7 +14,7 @@ import {
     FormInputButton
 } from './Form.elements';
 
-const FormSignup = ({ submitForm }) => {
+const FormSignup = ({ submitForm, error }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate
@@ -27,16 +27,17 @@ const FormSignup = ({ submitForm }) => {
                 Get started with us today! Create your account by filling out the
                 information below.
                 </Heading>
+                <Error>{error}</Error>
                 <FormInputs>
                 <FormLabel>Username</FormLabel>
                 <FormInput
                     type='text'
-                    name='username'
+                    name='login'
                     placeholder='Enter your username'
-                    value={values.username}
+                    value={values.login}
                     onChange={handleChange}
                 />
-                {errors.username && <Error>{errors.username}</Error>}
+                {errors.login && <Error>{errors.login}</Error>}
                 </FormInputs>
                 <FormInputs>
                 <FormLabel>Name</FormLabel>
@@ -75,12 +76,12 @@ const FormSignup = ({ submitForm }) => {
                 <FormLabel>Confirm Password</FormLabel>
                 <FormInput
                     type='password'
-                    name='password2'
+                    name='repeat_password'
                     placeholder='Confirm your password'
-                    value={values.password2}
+                    value={values.repeat_password}
                     onChange={handleChange}
                 />
-                {errors.password2 && <Error>{errors.password2}</Error>}
+                {errors.repeat_password && <Error>{errors.repeat_password}</Error>}
                 </FormInputs>
                 <FormInputButton type='submit'>
                 Sign up

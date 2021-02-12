@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux';
+import * as actions from '../../store/index';
+
 import {SignUp, FormSuccessSignIn} from '../../components';
 import { 
     FormContainer,
@@ -9,11 +12,20 @@ import {
 const image = require('../../images/signup.svg').default
 
 
-const Register = () => {
+const Register = (props) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [error, setError] = useState(null);
 
-    function submitForm() {
-        setIsSubmitted(true);
+    function submitForm(values) {
+        setError(null);
+        props.onAuth(values.login, values.password,
+            values.repeat_password, values.email, values.fullName, true);
+        if(!props.error) {
+            setIsSubmitted(true);
+            props.history.push('/verify-email');
+        } else {
+            setError(props.error)
+        }
     }
 
     return (
@@ -23,7 +35,7 @@ const Register = () => {
                 <FormImage src={image} alt="" />
             </FormContentLeft>
             {!isSubmitted ? (
-                <SignUp submitForm={submitForm} />
+                <SignUp submitForm={submitForm} error={error} />
             ) : (
                 <FormSuccessSignIn />
             )}
@@ -31,4 +43,18 @@ const Register = () => {
     )
 }
 
-export default Register
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+        error: state.auth.error
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (login, password, repeat_password, email, fullName, isSignup) => dispatch(actions.auth(login, password, repeat_password, email, fullName, isSignup))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
+

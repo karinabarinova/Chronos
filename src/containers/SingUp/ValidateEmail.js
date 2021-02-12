@@ -1,21 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import * as actions from '../../store/index';
 
-import {SignIn} from '../../components';
+import {FormValidateRegisteredEmail, FormSuccessSignIn} from '../../components';
 import { 
     FormContainer,
     CloseButton,
     FormImage,
     FormContentLeft
 } from '../../components/Forms/Form.elements'
-const image = require('../../images/signin.svg').default
+const image = require('../../images/signup.svg').default
 
 
-const Login = (props) => {
+const ValidateEmail = (props) => {
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     function submitForm(values) {
-        
+        // props.onAuth(values.login, values.password,
+        //     values.repeat_password, values.email, values.fullName, true);
+        // setIsSubmitted(true);
+        // props.history.push('/verify-email');
     }
 
     return (
@@ -24,7 +28,11 @@ const Login = (props) => {
             <FormContentLeft>
                 <FormImage src={image} alt="" />
             </FormContentLeft>
-            <SignIn submitForm={submitForm} />
+            {!isSubmitted ? (
+                <FormValidateRegisteredEmail submitForm={submitForm} />
+            ) : (
+                <FormSuccessSignIn />
+            )}
         </FormContainer>
     )
 }
@@ -42,4 +50,5 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(ValidateEmail);
+

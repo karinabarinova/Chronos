@@ -1,8 +1,8 @@
 export function validateInfoRegistration(values) {
 		let errors = {};
 	
-		if (!values.username.trim())
-			errors.username = 'Username required';
+		if (!values.login.trim())
+			errors.login = 'Username required';
 
 		if (!values.fullName.trim())
 			errors.fullName = "Name required"
@@ -29,8 +29,8 @@ export function validateInfoRegistration(values) {
 export function validateInfoLogin(values) {
 	let errors = {};
 	
-	if (!values.username.trim())
-		errors.username = 'Username required';
+	if (!values.login.trim())
+		errors.login = 'Username required';
 	
 
 	if (!values.email) 
@@ -45,6 +45,14 @@ export function validateInfoLogin(values) {
 	
 
 	return errors;
+}
+
+export function validateRegisteredEmail(values) {
+	let errors = {};
+
+	if (!values.token)
+		errors.token = "Token required"
+
 }
 
 export function validateInfoResetPassword(values) {
