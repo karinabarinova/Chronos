@@ -14,7 +14,7 @@ import {
     FormInputButton
 } from './Form.elements';
 
-const FormResetPasswordValidate = ({ submitForm }) => {
+const FormResetPasswordValidate = ({submitForm, error}) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate
@@ -26,6 +26,7 @@ const FormResetPasswordValidate = ({ submitForm }) => {
                 <Heading>
                 Provide the token sent to your email
                 </Heading>
+                <Error>{error}</Error>
                 <FormInputs>
                     <FormLabel>Token</FormLabel>
                     <FormInput
