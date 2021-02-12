@@ -1,5 +1,5 @@
 import React from 'react';
-import validate from './validateInfo';
+import {validateInfoResetPassword as validate} from './validateInfo';
 import useForm from './useForm';
 import {
     FormContentRight,
