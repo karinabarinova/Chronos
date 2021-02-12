@@ -14,7 +14,7 @@ import {
     FormInputButton
 } from './Form.elements';
 
-const FormValidateRegisteredEmail = ({ submitForm }) => {
+const FormValidateRegisteredEmail = ({ submitForm, error }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate
@@ -26,15 +26,16 @@ const FormValidateRegisteredEmail = ({ submitForm }) => {
                 <Heading>
                 Provide the token sent to your email
                 </Heading>
+                <Error>{error}</Error>
                 <FormInputs>
-                <FormLabel>Verification token</FormLabel>
-                <FormInput
-                    type='text'
-                    name='token'
-                    placeholder='Enter token'
-                    value={values.token}
-                    onChange={handleChange}
-                />
+                    <FormLabel>Verification token</FormLabel>
+                    <FormInput
+                        type="text"
+                        name="token"
+                        placeholder='Enter token'
+                        value={values.token}
+                        onChange={handleChange}
+                    />
                 {errors.token && <Error>{errors.token}</Error>}
                 </FormInputs>
                 <FormInputButton type='submit'>

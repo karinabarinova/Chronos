@@ -14,7 +14,7 @@ import {
     FormInputButton
 } from './Form.elements';
 
-const FormSignin = ({ submitForm }) => {
+const FormSignin = ({ submitForm, error, redirect }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate
@@ -22,20 +22,22 @@ const FormSignin = ({ submitForm }) => {
 
   return (
         <FormContentRight>
+            {redirect}
             <Form onSubmit={handleSubmit} noValidate>
                 <Heading>
                 Welcome back! Let's nail the day together
                 </Heading>
+                <Error>{error}</Error>
                 <FormInputs>
                 <FormLabel>Username</FormLabel>
                 <FormInput
                     type='text'
-                    name='username'
+                    name='login'
                     placeholder='Enter your username'
-                    value={values.username}
-                    onChange={handleChange}
+                    value={values.login}
+                    onChange={(e) => handleChange(e)}
                 />
-                {errors.username && <Error>{errors.username}</Error>}
+                {errors.login && <Error>{errors.login}</Error>}
                 </FormInputs>
                 <FormInputs>
                 <FormLabel>Email</FormLabel>

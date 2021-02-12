@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {Component} from 'react'
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/index';
 
-import {SignIn} from '../../components';
+import {SignIn, FormSuccessSignIn} from '../../components';
 import { 
     FormContainer,
     CloseButton,
@@ -12,27 +13,45 @@ import {
 const image = require('../../images/signin.svg').default
 
 
-const Login = (props) => {
-
-    function submitForm(values) {
-        
+class Login extends Component {
+    state = {
+        isSubmitted: false
     }
 
-    return (
-        <FormContainer>
-            <CloseButton>x</CloseButton>
-            <FormContentLeft>
-                <FormImage src={image} alt="" />
-            </FormContentLeft>
-            <SignIn submitForm={submitForm} />
-        </FormContainer>
-    )
+    submitForm = (values) => {
+        this.props.onAuth(values.login, values.password,
+            null, values.email, null, false);
+    }
+
+    render() {
+        let authRedirect = null;
+        let error = null;
+        if (this.props.isAuthenticated && !authRedirect)
+            authRedirect = <Redirect to="/" />
+        if (this.props.error)
+            error = this.props.error
+    
+        return (
+            <FormContainer>
+                <CloseButton>x</CloseButton>
+                <FormContentLeft>
+                    <FormImage src={image} alt="" />
+                </FormContentLeft>
+                {!this.state.isSubmitted ? (
+                    <SignIn submitForm={this.submitForm} error={error} redirect={authRedirect} />
+                ) : (
+                    <FormSuccessSignIn />
+                )}
+            </FormContainer>
+        )
+    }
 }
 
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.jwtToken !== null
     };
 };
 

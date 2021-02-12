@@ -32,7 +32,7 @@ const FormResetPasswordValidate = ({ submitForm }) => {
                         type='text'
                         name='token'
                         placeholder='Enter your token'
-                        value={values.email}
+                        value={values.token}
                         onChange={handleChange}
                     />
                     {errors.token && <Error>{errors.token}</Error>}

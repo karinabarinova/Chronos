@@ -16,6 +16,7 @@ const ValidateEmail = (props) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     function submitForm(values) {
+        console.log(values)
         // props.onAuth(values.login, values.password,
         //     values.repeat_password, values.email, values.fullName, true);
         // setIsSubmitted(true);

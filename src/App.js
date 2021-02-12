@@ -12,7 +12,7 @@ import SingUp from './containers/SingUp/SingUp';
 import ScrollToTop from './components/scrollToTop';
 import SingIn from './containers/SignIn/SingIn';
 import ResetPassword from './containers/ResetPassword/ResetPassword';
-import ResetPasswordValidate from './containers/ResetPassword/ResetPasswordValidate'
+import ResetPasswordValidate from './containers/ResetPassword/ResetPasswordValidate';
 import Logout from './containers/Logout/Logout';
 import VerifyEmail from './containers/SingUp/ValidateEmail';
 
@@ -41,6 +41,7 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/services" exact component={Services} />
           <Route path="/products" exact component={Products} />
+          <Route path="/sign-in" exact component={SingIn} />
           <Route path="/logout" component={Logout} />
           {/* <Route path="/account" component={Account} />
           <Route component={NotFound} */}

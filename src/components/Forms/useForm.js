@@ -6,7 +6,8 @@ const useForm = (callback, validate) => {
     email: '',
     fullName: '',
     password: '',
-    repeat_password: ''
+    repeat_password: '',
+    token: ''
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,7 +35,6 @@ const useForm = (callback, validate) => {
     },
     [errors]
   );
-
   return { handleChange, handleSubmit, values, errors };
 };
 
