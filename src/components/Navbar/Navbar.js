@@ -16,7 +16,7 @@ import {
     NavBtnContainer
 } from './Navbar.elements';
 
-const Navbar = (isAuthenticated) => {
+const Navbar = ({isAuthenticated}) => {
     const [click, setClick] = useState(false)
     const [button, setButton] = useState(true)
 
@@ -58,9 +58,15 @@ const Navbar = (isAuthenticated) => {
                             <NavItem>
                                 <NavLink to="/products">Products</NavLink>
                             </NavItem>
-                            {isAuthenticated ? (<NavItem>
-                                <NavLink to="/logout">Log out</NavLink>
-                            </NavItem>) : (<NavItemBtn>
+                            {isAuthenticated ? (
+                                <>
+                            <NavItem>
+                            <NavLink to="/logout">Log out</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink to="/account">Account</NavLink>
+                            </NavItem></>) : (
+                            <NavItemBtn>
                                 {button ? (
                                     <NavBtnContainer>
                                         <NavBtnLink to="/sign-up">
@@ -80,7 +86,8 @@ const Navbar = (isAuthenticated) => {
                                         </NavBtnLink>
                                     </NavBtnContainer>
                                 )}
-                            </NavItemBtn>)}
+                            </NavItemBtn>
+                            )}
                             
                         </NavMenu>
                     </NavbarContainer>
