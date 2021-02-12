@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios';
 import {FormResetPassword} from '../../components';
 import { 
     FormContainer,
@@ -9,14 +10,22 @@ import {
 const image = require('../../images/signin.svg').default
 
 
-const ResetPassword = () => {
+const ResetPassword = (props) => {
+    const [error, setError] = useState(null);
+
+    const submitForm = (values) => {
+        axios.post('auth/password-reset', {email: values.email})
+            .then(res => props.history.push('/reset-password-confirm'))
+            .catch(e => setError(e))
+    }
+
     return (
         <FormContainer>
             <CloseButton>x</CloseButton>
             <FormContentLeft>
                 <FormImage src={image} alt="" />
             </FormContentLeft>
-            <FormResetPassword />
+            <FormResetPassword submitForm={submitForm} error={error} />
         </FormContainer>
     )
 }
