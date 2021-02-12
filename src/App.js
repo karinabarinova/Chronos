@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from './store/index';
 import GlobalStyle from './globalStyles';
-import { BrowserRouter, Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import { Navbar, Footer } from './components'
 import Home from './containers/HomePage/Home';
 import Services from './containers/Services/Services';
@@ -13,6 +13,7 @@ import ScrollToTop from './components/scrollToTop';
 import SingIn from './containers/SignIn/SingIn';
 import ResetPassword from './containers/ResetPassword/ResetPassword';
 import ResetPasswordValidate from './containers/ResetPassword/ResetPasswordValidate'
+import Logout from './containers/Logout/Logout';
 
 class App extends Component {
   componentDidMount() {
@@ -45,13 +46,13 @@ class App extends Component {
       )
     }
     return (
-      <BrowserRouter>
-        <GlobalStyle />
+      <>
+       <GlobalStyle />
         <ScrollToTop />
-        <Navbar />
+        <Navbar isAuthenticated={this.props.isAuthenticated} />
         {routes}
         <Footer />
-      </BrowserRouter>
+      </>
     );
   }
 }
@@ -68,4 +69,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps))(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

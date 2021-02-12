@@ -1,21 +1,21 @@
 import * as actionTypes from '../actionTypes';
-import { updatedObject } from '../utility';
+import { updateObject } from '../utility';
 
 const initialState = {
     jwtToken: null,
     userId: null,
     error: null,
-    loading: null,
+    loading: false,
     login: null,
     role: null,
 }
 
 const authStart = (state, action) => {
-    return updatedObject(state, { error: null, loading: true });
+    return updateObject(state, {error: null, loading: true});
 }
 
 const authSuccess = (state, action) => {
-    return updatedObject(state, {
+    return updateObject(state, {
         jwtToken: action.jwtToken,
         userId: action.id,
         error: null,
@@ -26,14 +26,14 @@ const authSuccess = (state, action) => {
 }
 
 const authFail = (state, action) => {
-    return updatedObject(state, {
+    return updateObject(state, {
         error: action.error,
         loading: false
     })
 }
 
 const authLogout = (state, action) => {
-    return updatedObject(state, {
+    return updateObject(state, {
         jwtToken: null,
         userId: null,
         login: null,

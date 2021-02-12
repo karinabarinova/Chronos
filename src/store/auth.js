@@ -4,31 +4,33 @@ import * as actionTypes from './actionTypes';
 export const authStart = () => {
     return {
         type: actionTypes.AUTH_START
-    }
-}
+    };
+};
 
 export const authSuccess = (jwtToken, userId, login) => {
+
     return {
         type: actionTypes.AUTH_SUCCESS,
-        jwtToken,
+        jwtToken: jwtToken,
         userId,
         login
-    }
-}
+    };
+};
 
 export const authFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
-        error
-    }
-}
+        error: error
+    };
+};
 
 export const logout = () => {
-    localStorage.removeItem('token')
+
+    localStorage.removeItem('token');
     localStorage.removeItem('expirationDate')
     localStorage.removeItem('userId')
-    localStorage.removeItem('login')
-    localStorage.removeItem('role')
+    localStorage.removeItem('login');
+    localStorage.removeItem('role');
 
     return {
         type: actionTypes.AUTH_LOGOUT
@@ -39,7 +41,7 @@ export const checkAuthTimeout = (expirationDate) => {
     return dispatch => {
         setTimeout(() => {
             dispatch(logout());
-        }, expirationDate * 1000);
+        }, expirationDate * 1000); 
     }
 }
 
@@ -73,8 +75,7 @@ export const auth = (login, password, repeat_password, email, fullName, isSignup
                 localStorage.setItem('token', res.data.jwtToken);
                 localStorage.setItem('expirationDate', expirationDate );
                 localStorage.setItem('userId', res.data.id);
-                localStorage.setItem('username', res.data.login);
-                localStorage.setItem('avatar', res.data.avatar);
+                localStorage.setItem('login', res.data.login);
                 localStorage.setItem('role', res.data.role);
                 dispatch(authSuccess(res.data.jwtToken, res.data.id, res.data.login))
                 dispatch(checkAuthTimeout(res.data.expiresIn));
