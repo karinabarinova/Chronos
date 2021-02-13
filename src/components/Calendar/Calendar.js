@@ -14,12 +14,12 @@ const Calendar = () => {
 
     return (
         <FullCalendar
-        initialView="dayGridMonth" 
+        initialView="dayGridWeek" 
         nowIndicator={true}
         businessHours={{
-            daysOfWeek:[ 1, 2, 3, 4, 5 ], // Monday - Friday
-            startTime: '9:00', // 9am
-            endTime: '18:00', // 6pm
+            daysOfWeek:[ 1, 2, 3, 4, 5 ],
+            startTime: '9:00',
+            endTime: '18:00',
         }}
         weekNumbers={true}
         weekText="Week #"
@@ -29,13 +29,15 @@ const Calendar = () => {
         handleWindowResize={true}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         editable={true}
-                    // eventDrop={this.handleEventDrop}
-                    // eventClick={this.handleEventClick}
-                    // events={this.formatEvents()}
         headerToolbar={{
-          left: "prevYear,prev,next,nextYear",
-          center: "title,today",
+          left: "prev,next,today", //"prevYear,prev,next,nextYear,today"
+          center: "title",
           right: "dayGridMonth,timeGridWeek,timeGridDay"
+        }}
+        footerToolbar={{
+            left: "prev,next,today", //"prevYear,prev,next,nextYear,today"
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay"
         }}
         events={events}
       />

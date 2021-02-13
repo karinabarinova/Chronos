@@ -29,8 +29,10 @@ export const CalendarContainer = styled.div`
 
     @media screen and (max-width: 820px) {
         margin: 50px auto;
-        width: 90%;
-        grid-template-columns: 1fr;
+        font-size: small;
+        height: 100%;
+        width: 100%;
+        /* grid-template-columns: 1fr; */
     }
 
 `;
