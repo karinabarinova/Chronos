@@ -16,6 +16,11 @@ const Calendar = () => {
         <FullCalendar
         initialView="dayGridMonth" 
         nowIndicator={true}
+        businessHours={{
+            daysOfWeek:[ 1, 2, 3, 4, 5 ], // Monday - Friday
+            startTime: '9:00', // 9am
+            endTime: '18:00', // 6pm
+        }}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         editable={true}
                     // eventDrop={this.handleEventDrop}
