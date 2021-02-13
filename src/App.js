@@ -15,6 +15,7 @@ import ResetPassword from './containers/ResetPassword/ResetPassword';
 import ResetPasswordValidate from './containers/ResetPassword/ResetPasswordValidate';
 import Logout from './containers/Logout/Logout';
 import VerifyEmail from './containers/SingUp/ValidateEmail';
+import NotFound from './containers/NotFound/NotFound';
 
 class App extends Component {
   componentDidMount() {
@@ -32,6 +33,7 @@ class App extends Component {
           <Route path="/sign-in" exact component={SingIn} />
           <Route path="/reset-password" exact component={ResetPassword} />
           <Route path="/reset-password-confirm" exact component={ResetPasswordValidate} />
+          <Route component={NotFound} />
       </Switch>
     );
 
@@ -43,8 +45,8 @@ class App extends Component {
           <Route path="/products" exact component={Products} />
           <Route path="/sign-in" exact component={SingIn} />
           <Route path="/logout" component={Logout} />
-          {/* <Route path="/account" component={Account} />
-          <Route component={NotFound} */}
+          {/* <Route path="/account" component={Account} /> */}
+          <Route component={NotFound} />
         </Switch>
       )
     }
