@@ -23,6 +23,9 @@ const Calendar = () => {
         }}
         weekNumbers={true}
         weekText="Week #"
+        dayHeaders={true}
+        dayHeaderFormat={{ weekday: 'long', month: 'short', day: 'numeric', omitCommas: true }
+    }
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         editable={true}
                     // eventDrop={this.handleEventDrop}
