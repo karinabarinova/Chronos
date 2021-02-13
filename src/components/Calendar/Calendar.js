@@ -21,6 +21,7 @@ const Calendar = () => {
             startTime: '9:00', // 9am
             endTime: '18:00', // 6pm
         }}
+        weekNumbers={true}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         editable={true}
                     // eventDrop={this.handleEventDrop}
