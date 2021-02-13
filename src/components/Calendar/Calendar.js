@@ -2,9 +2,10 @@ import React from 'react';
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from "@fullcalendar/timegrid";
 
-import "@fullcalendar/core/main.cjs";
+import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
@@ -13,13 +14,18 @@ const Calendar = () => {
 
     return (
         <FullCalendar
-        defaultView="dayGridMonth"
-        header={{
+        initialView="dayGridMonth" 
+        nowIndicator={true}
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        editable={true}
+                    // eventDrop={this.handleEventDrop}
+                    // eventClick={this.handleEventClick}
+                    // events={this.formatEvents()}
+        headerToolbar={{
           left: "prev,next",
           center: "title",
           right: "dayGridMonth,timeGridWeek,timeGridDay"
         }}
-        plugins={[dayGridPlugin, timeGridPlugin]}
         events={events}
       />
     )
