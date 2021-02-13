@@ -4,7 +4,7 @@ module.exports = model;
 
 function model(sequelize) {
     const attributes = {
-        name: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -21,10 +21,10 @@ function model(sequelize) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        startTime: {
+        start: {
             type: DataTypes.DATE
         },
-        endTime: {
+        end: {
             type: DataTypes.DATE
         },
         participants: {

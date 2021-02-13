@@ -10,7 +10,7 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
 const Calendar = () => {
-    const events = [{ title: "today's event", date: new Date() }];
+    const events = [{ title: "today's event", start: new Date(), end: new Date("2021-02-14") }];
 
     return (
         <FullCalendar
@@ -21,6 +21,7 @@ const Calendar = () => {
             startTime: '9:00',
             endTime: '18:00',
         }}
+        eventColor="#378006"
         weekNumbers={true}
         weekText="Week #"
         dayHeaders={true}
