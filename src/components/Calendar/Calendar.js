@@ -25,15 +25,16 @@ const Calendar = () => {
         weekText="Week #"
         dayHeaders={true}
         dayHeaderFormat={{ weekday: 'long', month: 'short', day: 'numeric', omitCommas: true }
-    }
+        }
+        handleWindowResize={true}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         editable={true}
                     // eventDrop={this.handleEventDrop}
                     // eventClick={this.handleEventClick}
                     // events={this.formatEvents()}
         headerToolbar={{
-          left: "prev,next",
-          center: "title",
+          left: "prevYear,prev,next,nextYear",
+          center: "title,today",
           right: "dayGridMonth,timeGridWeek,timeGridDay"
         }}
         events={events}
