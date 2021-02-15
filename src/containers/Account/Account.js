@@ -8,12 +8,14 @@ import {
 import { Calendar } from '../../components'
 
 class Account extends Component {
+    _isMounted = false;
 
     state = {
         events: []
     }
 
     componentDidMount() {
+        this._isMounted = true
         this.loadData()
     }
 
@@ -24,15 +26,20 @@ class Account extends Component {
             }
         }
         axios.get('/calendars/14/events', config)
-            .then(res => {this.setState({ events: res.data })})
+            .then(res => {
+                if (this._isMounted)
+                    this.setState({ events: res.data })
+            })
             .catch(e => console.log(e))
+    }
+    componentWillUnmount() {
+        this._isMounted = false
     }
 
     render() {
         let events = null;
         if (this.state.events)
             events = this.state.events
-        console.log(events)
         return (
             <CalendarContainer>
                 <Calendar events={events}/>
