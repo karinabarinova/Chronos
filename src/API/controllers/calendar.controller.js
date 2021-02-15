@@ -40,6 +40,12 @@ function getById(req, res, next) {
         .catch(next);
 }
 
+// function getById(req, res, next) {
+//     calendarService.getById(req.params.id, req.user.id)
+//         .then(data => res.json(data))
+//         .catch(next);
+// }
+
 function createSchema(req, res, next) {
     const schema = Joi.object({
         name: Joi.string().empty('').required(),

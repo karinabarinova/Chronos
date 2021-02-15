@@ -10,9 +10,10 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
 const Calendar = (props) => {
-    
+
     return (
         <FullCalendar
+        height={650}
         initialView="dayGridWeek" 
         nowIndicator={true}
         businessHours={{
@@ -34,11 +35,11 @@ const Calendar = (props) => {
           center: "title",
           right: "dayGridMonth,timeGridWeek,timeGridDay"
         }}
-        footerToolbar={{
-            left: "prev,next,today", //"prevYear,prev,next,nextYear,today"
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay"
-        }}
+        // footerToolbar={{
+        //     left: "prev,next,today", //"prevYear,prev,next,nextYear,today"
+        //     center: "title",
+        //     right: "dayGridMonth,timeGridWeek,timeGridDay"
+        // }}
         events={props.events}
       />
     )
