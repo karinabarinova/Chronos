@@ -2,7 +2,7 @@ const db = require('../helpers/db');
 
 module.exports = {
     getAll,
-    // getById,
+    getById,
     create,
     // update,
     // delete: _delete
@@ -14,6 +14,14 @@ async function getAll(creator, CalendarId) {
         return await db.Events.findAll( { where: {CalendarId} } )
     else
         throw 'Unauthorized'
+}
+
+async function getById(id, creator) {
+    const event = await db.Events.findByPk(id)
+    const calendar = await db.Calendar.findByPk(event.CalendarId)
+    if (calendar.creator === creator)
+        return event
+    throw 'Unauthorized'
 }
 
 async function create(params, creator, CalendarId) {
