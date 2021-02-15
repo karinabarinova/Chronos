@@ -3,7 +3,6 @@ const db = require('../helpers/db');
 module.exports = {
     getAll,
     getById,
-    // getAllEvents,
     create,
     update,
     delete: _delete
@@ -21,22 +20,22 @@ async function getById(id, creator) {
     throw 'Calendar not found'
 }
 
-async function getAllEvents(id) {
-    await getCalendar(id)
-    const events = await db.Calendar.findAll({ 
-        where: {id},
-        attributes: [],
-        include: [{
-            model: db.Events,
-            as: 'events',
-            through: {
-                attributes: []
-            }
-        }]
-    })
-    // console.log(posts[0].posts)
-    return events[0].events
-}
+// async function getAllEvents(id) {
+//     await getCalendar(id)
+//     const events = await db.Calendar.findAll({ 
+//         where: {id},
+//         attributes: [],
+//         include: [{
+//             model: db.Events,
+//             as: 'events',
+//             through: {
+//                 attributes: []
+//             }
+//         }]
+//     })
+//     // console.log(posts[0].posts)
+//     return events[0].events
+// }
 
 async function create(params, creator) {
     const fullParams = {

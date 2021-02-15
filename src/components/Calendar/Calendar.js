@@ -9,8 +9,8 @@ import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
-const Calendar = () => {
-    const events = [{ title: "today's event", start: new Date(), end: new Date("2021-02-14") }];
+const Calendar = (props) => {
+    // const events = [{ title: "today's event", start: new Date(), end: new Date("2021-02-14") }];
 
     return (
         <FullCalendar
@@ -40,7 +40,7 @@ const Calendar = () => {
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay"
         }}
-        events={events}
+        events={props.events}
       />
     )
 }

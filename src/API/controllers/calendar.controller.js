@@ -10,6 +10,7 @@ const Role = require('../helpers/role')
 module.exports = router
 //routers
 router.get('/', authorize(), getAll) //get all calendar
+router.get('/:id/events', authorize(), getAllEvents)
 //TO DO: Add route to get specific event under calendar
 //TO DO: Add route to get all events under calendar
 router.get('/:id', authorize(), getById) //get specific calendar
@@ -25,14 +26,16 @@ function getAll(req, res, next) {
         .catch(next);
 }
 
-function getById(req, res, next) {
-    calendarService.getById(req.params.id, req.user.id)
-        .then(data => res.json(data))
+function getAllEvents(req, res, next) {
+    eventsService.getAll(req.user.id, req.params.id)
+        .then(data => {
+            res.json(data)
+        })
         .catch(next);
 }
 
-function getAllEvents(req, res, next) {
-    calendarService.getAllEvents(req.params.id)
+function getById(req, res, next) {
+    calendarService.getById(req.params.id, req.user.id)
         .then(data => res.json(data))
         .catch(next);
 }

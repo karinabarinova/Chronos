@@ -1,12 +1,20 @@
 const db = require('../helpers/db');
 
 module.exports = {
-    // getAll,
+    getAll,
     // getById,
     create,
     // update,
     // delete: _delete
 };
+
+async function getAll(creator, CalendarId) {
+    const calendar = await getCalendar(CalendarId)
+    if (calendar && calendar.creator === creator)
+        return await db.Events.findAll( { where: {CalendarId} } )
+    else
+        throw 'Unauthorized'
+}
 
 async function create(params, creator, CalendarId) {
     const calendar = await getCalendar(CalendarId)
