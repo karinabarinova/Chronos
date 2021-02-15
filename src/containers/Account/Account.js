@@ -23,15 +23,19 @@ class Account extends Component {
                 'authorization': `Basic ${localStorage.getItem('token')}`
             }
         }
-        axios.get('/calendars/3/events', config)
-            .then(res => this.setState({ events: res.data }))
+        axios.get('/calendars/14/events', config)
+            .then(res => {this.setState({ events: res.data })})
             .catch(e => console.log(e))
     }
 
     render() {
+        let events = null;
+        if (this.state.events)
+            events = this.state.events
+        console.log(events)
         return (
             <CalendarContainer>
-                <Calendar events={this.state.events}/>
+                <Calendar events={events}/>
             </CalendarContainer>
         )
     }

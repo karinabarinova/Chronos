@@ -10,8 +10,7 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
 const Calendar = (props) => {
-    // const events = [{ title: "today's event", start: new Date(), end: new Date("2021-02-14") }];
-
+    
     return (
         <FullCalendar
         initialView="dayGridWeek" 
