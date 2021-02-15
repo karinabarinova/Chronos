@@ -81,7 +81,7 @@ async function verifyEmail({ token }, ip) {
     user.verificationToken = null;
     await user.save();
     await createDefaultCalendar(user.id, user.fullName)
-    getLocationHolidays(ip)
+    await createHolidaysCalendar(user.id, ip)
 }
 
 async function forgotPassword({ email }, origin) {
@@ -212,6 +212,30 @@ async function createDefaultCalendar(id, name) {
         canHide: false
     }
     const calendar = await db.Calendar.create(params);
+}
+
+async function createHolidaysCalendar(id, ip) {
+    const { holidays } = await getLocationHolidays(ip);
+    const params = {
+        creator: id,
+        name: "Holidays",
+        description: `Country Holidays`,
+        color: "#86bd33",
+        canDelete: true,
+        canHide: true
+    }
+    const calendar = await db.Calendar.create(params);
+
+    holidays.forEach(async function(data) {
+        await db.Events.create({
+            title: data.name,
+            description: data.name,
+            CalendarId: calendar.id,
+            defaultDuration: "1 day",
+            start: data.date,
+            end: data.date
+            })
+    })
 }
 
 async function getLocationHolidays(ip) {
