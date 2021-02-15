@@ -3,16 +3,19 @@ const router = express.Router()
 const Joi = require('joi')
 const validateRequest = require('../middleware/validate-request')
 const authorize = require('../middleware/authorize')
-// const isOwner = require('../middleware/isOwner')
 const calendarService = require('../services/calendar.service')
+const eventsService = require('../services/events.service')
 const Role = require('../helpers/role')
 
 module.exports = router
 //routers
 router.get('/', authorize(), getAll) //get all calendar
+//TO DO: Add route to get specific event under calendar
+//TO DO: Add route to get all events under calendar
 router.get('/:id', authorize(), getById) //get specific calendar
 // router.get('/:id/events', authorize(), getAllEvents)
 router.post('/', authorize(), createSchema, create) //create calendar
+router.post('/:id/events', authorize(), createSchemaEvent, createEvent)
 router.patch('/:id', authorize(), updateSchema, update) //update calendar
 router.delete('/:id', authorize(), _delete) //delete calendar
 
@@ -47,6 +50,22 @@ function createSchema(req, res, next) {
 function create(req, res, next) {
     calendarService.create(req.body, req.user.id)
         .then((data) => res.json({ message: "Calendar Creation successful", data}))
+        .catch(next)
+}
+
+function createSchemaEvent(req, res, next) {
+    const schema = Joi.object({
+        title: Joi.string().empty('').required(),
+        description: Joi.string().empty(''),
+        start: Joi.string().empty('').required(),
+        end: Joi.string().empty('')
+    })
+    validateRequest(req, next, schema)
+}
+
+function createEvent(req, res, next) {
+    eventsService.create(req.body, req.user.id, req.params.id)
+        .then((data) => res.json({ message: "Event Creation successful", data}))
         .catch(next)
 }
 
