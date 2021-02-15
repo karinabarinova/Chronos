@@ -5,7 +5,7 @@ module.exports = {
     getById,
     create,
     update,
-    // delete: _delete
+    delete: _delete
 };
 
 async function getAll(creator, CalendarId) {
@@ -40,6 +40,15 @@ async function update(params, id, user) {
         return event
     }
     throw 'Unauthorized'
+}
+
+async function _delete(id, creator) {
+    const event = await getEvent(id)
+    const calendar = await getCalendar(event.CalendarId)
+    if (calendar.creator === creator)
+        await event.destroy();
+    else
+        throw 'Unauthorized'
 }
 
 //helpers

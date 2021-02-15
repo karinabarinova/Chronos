@@ -33,3 +33,9 @@ function update(req, res, next) {
         .then((data) => res.json(data))
         .catch(next)
 }
+
+function _delete(req, res, next) {
+    eventsService.delete(req.params.id, req.user.id)
+        .then(() => res.json({message: "Event deleted successfully"}))
+        .catch(next)
+}
