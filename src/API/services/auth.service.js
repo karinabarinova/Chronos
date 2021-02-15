@@ -227,26 +227,30 @@ async function createHolidaysCalendar(id, ip) {
     const calendar = await db.Calendar.create(params);
 
     holidays.forEach(async function(data) {
+        const nextDay = new Date(data.date)
+        nextDay.setDate(nextDay.getDate() + 1);
         await db.Events.create({
             title: data.name,
             description: data.name,
             CalendarId: calendar.id,
             defaultDuration: "1 day",
             start: data.date,
-            end: data.date
+            end: nextDay
             })
     })
 }
 
 async function getLocationHolidays(ip) {
     var geo = null;
+    const previousYear = new Date().getFullYear() - 1;
+
     if (ip === "::1")
-        geo = geoip.lookup("94.153.64.26")
+        geo = geoip.lookup("94.153.64.26") //Ukraine IP
     else
         geo = geoip.lookup(ip)
     const params = {
         country: geo.country,
-        year: 2020
+        year: previousYear
     }
     return await holidayApi.holidays(params);
 }
