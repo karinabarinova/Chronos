@@ -16,3 +16,20 @@ function getById(req, res, next) {
         .then(data => res.json(data))
         .catch(next);
 }
+
+function updateSchema(req, res, next) {
+    const schema = Joi.object({
+        title: Joi.string().empty(''),
+		description: Joi.string().empty(''),
+        participants: Joi.string().empty(''),
+        start: Joi.string().empty(''),
+        end: Joi.string().empty('')
+    })
+    validateRequest(req, next, schema)
+}
+
+function update(req, res, next) {
+    eventsService.update(req.body, req.params.id, req.user.id)
+        .then((data) => res.json(data))
+        .catch(next)
+}

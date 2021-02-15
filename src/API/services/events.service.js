@@ -4,7 +4,7 @@ module.exports = {
     getAll,
     getById,
     create,
-    // update,
+    update,
     // delete: _delete
 };
 
@@ -17,8 +17,8 @@ async function getAll(creator, CalendarId) {
 }
 
 async function getById(id, creator) {
-    const event = await db.Events.findByPk(id)
-    const calendar = await db.Calendar.findByPk(event.CalendarId)
+    const event = await getEvent(id)
+    const calendar = await getCalendar(event.CalendarId)
     if (calendar.creator === creator)
         return event
     throw 'Unauthorized'
@@ -31,9 +31,26 @@ async function create(params, creator, CalendarId) {
     throw 'Unauthorized'
 }
 
+async function update(params, id, user) {
+    const event = await getEvent(id)
+    const calendar = await getCalendar(event.CalendarId)
+    if (calendar.creator === user) {
+        Object.assign(event, params)
+        await user.save();
+        return event
+    }
+    throw 'Unauthorized'
+}
+
 //helpers
 async function getCalendar(id) {
     const calendar = await db.Calendar.findByPk(id);
     if (!calendar) throw 'Calendar not found';
     return calendar;
+}
+
+async function getEvent(id) {
+    const event = await db.Events.findByPk(id);
+    if (!event) throw 'Event not found';
+    return event;
 }
