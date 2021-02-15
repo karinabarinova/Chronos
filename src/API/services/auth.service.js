@@ -229,8 +229,8 @@ async function createHolidaysCalendar(id, ip) {
     holidays.forEach(async function(data) {
         const date = new Date(data.date)
         date.setFullYear(date.getFullYear() + 1);
-        // const nextDay = new Date(date)
-        // nextDay.setDate(nextDay.getDate() + 1);
+        const date2 = new Date(date)
+        const LastMinuteDate = date2.setUTCHours(21, 59, 59)
 
         await db.Events.create({
             title: data.name,
@@ -238,7 +238,7 @@ async function createHolidaysCalendar(id, ip) {
             CalendarId: calendar.id,
             defaultDuration: "1 day",
             start: date,
-            end: date
+            end: LastMinuteDate
             })
     })
 }
