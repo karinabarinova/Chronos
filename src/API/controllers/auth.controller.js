@@ -66,7 +66,7 @@ function verifyEmailSchema(req, res, next) {
 }
 
 function verifyEmail(req, res, next) {
-    authService.verifyEmail(req.body)
+    authService.verifyEmail(req.body, req.ip)
         .then(() => res.json({ message: 'Verification successful, you can now login' }))
         .catch(next);
 }

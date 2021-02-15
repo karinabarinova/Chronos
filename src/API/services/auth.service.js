@@ -1,11 +1,18 @@
 const config = require('../config.json')
 const jwt = require('jsonwebtoken');
+const geoip = require('geoip-lite');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto')
 const { Op } = require('sequelize')
 const sendEmail = require('../helpers/send-email')
 const db = require('../helpers/db');
 const Role = require('../helpers/role')
+
+const { HolidayAPI } = require('holidayapi') ;
+const key = 'de4c4bc0-ac21-4f73-95ef-9935d5aad3bd';
+const holidayApi = new HolidayAPI({ key });
+// const HolidayAPI = require('holidayapi-node');
+// const hApi = new HolidayAPI("de4c4bc0-ac21-4f73-95ef-9935d5aad3bd").v1
 
 module.exports = {
     authenticate,
@@ -65,7 +72,7 @@ async function register(params, origin) {
     await sendVerificationEmail(user, origin);
 }
 
-async function verifyEmail({ token }) {
+async function verifyEmail({ token }, ip) {
     const user = await db.User.findOne({ where: { verificationToken: token } });
 
     if (!user) throw 'Verification failed';
@@ -74,6 +81,7 @@ async function verifyEmail({ token }) {
     user.verificationToken = null;
     await user.save();
     await createDefaultCalendar(user.id, user.fullName)
+    getLocationHolidays(ip)
 }
 
 async function forgotPassword({ email }, origin) {
@@ -204,4 +212,17 @@ async function createDefaultCalendar(id, name) {
         canHide: false
     }
     const calendar = await db.Calendar.create(params);
+}
+
+async function getLocationHolidays(ip) {
+    var geo = null;
+    if (ip === "::1")
+        geo = geoip.lookup("94.153.64.26")
+    else
+        geo = geoip.lookup(ip)
+    const params = {
+        country: geo.country,
+        year: 2020
+    }
+    return await holidayApi.holidays(params);
 }
