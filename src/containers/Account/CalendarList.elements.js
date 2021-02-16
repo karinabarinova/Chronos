@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const CheckboxContainer = styled.div`
@@ -44,15 +44,23 @@ const StyledCheckbox = styled.div`
   }
 `
 
-const Checkbox = ({ className, checked, ...props }) => (
-  <CheckboxContainer className={className}>
-    <HiddenCheckbox checked={checked} {...props} />
-    <StyledCheckbox checked={checked}>
-      <Icon viewBox="0 0 24 24">
-        <polyline points="20 6 9 17 4 12" />
-      </Icon>
-    </StyledCheckbox>
-  </CheckboxContainer>
-)
+const Checkbox = ({ className, ...props }) => {
+    const [checked, changeChecked] = useState(true);
+
+    // const handleCheckBoxChange = () => {
+    //     changeChecked(!checked);
+    // }
+
+
+    return (
+        <CheckboxContainer className={className} onChange={() => changeChecked(!checked)}>
+            <HiddenCheckbox checked={checked} {...props} />
+            <StyledCheckbox checked={checked}>
+            <Icon viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" />
+            </Icon>
+            </StyledCheckbox>
+        </CheckboxContainer>
+)}
 
 export default Checkbox
