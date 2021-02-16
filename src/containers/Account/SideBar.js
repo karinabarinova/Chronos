@@ -1,12 +1,12 @@
 import React from 'react'
 import CalendarList from './CalendarList';
-import {SidebarContainer} from './Sidebar.elements';
+import {SidebarContainer, SidebarTitle} from './SideBar.elements';
 
 const SideBar = () => {
     return (
         <SidebarContainer>
             <div>
-            <h3>My Calendars</h3>
+            <SidebarTitle>My Calendars</SidebarTitle>
                 <CalendarList />
             </div>
         </SidebarContainer>

@@ -6,7 +6,7 @@ export const AccountContainer = styled.div`
     max-width: 1300px;
     margin-top: 50px;
     /* margin-left: auto; */
-    margin-right: 0;
+    /* margin-right: auto; */
     padding-right: 50px;
     padding-left: 50px;
 
@@ -18,7 +18,7 @@ export const AccountContainer = styled.div`
 
 export const CalendarContainer = styled.div`
     margin: 50px auto;
-    width: 1200px;
+    width: 2000px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     height: 100%;
@@ -33,7 +33,7 @@ export const CalendarContainer = styled.div`
 `;
 
 export const ParentCalendarContainer = styled.div`
-    width: 100%;
+    width: 90vw;
     display: flex;
     /* height: 100vh; */
 `;

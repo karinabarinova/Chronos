@@ -4,7 +4,7 @@ export const SidebarContainer = styled.div`
     z-index: 1;
     width: 30%;
     max-width: 1300px;
-    margin-top: 50px;
+    margin-top: 100px;
     /* margin-left: auto; */
     margin-right: 0;
     padding-right: 50px;
@@ -14,4 +14,8 @@ export const SidebarContainer = styled.div`
         padding-right: 30px;
         padding-left: 30px;
     }
+`;
+
+export const SidebarTitle = styled.h3`
+    margin: 16px;
 `;
