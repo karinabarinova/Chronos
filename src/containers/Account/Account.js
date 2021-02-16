@@ -5,6 +5,7 @@ import {
     CalendarContainer,
     FormImage,
 } from '../../components/Forms/Form.elements'
+import NewCalendar from './NewCalendar'
 import { Calendar } from '../../components'
 
 class Account extends Component {
@@ -42,9 +43,12 @@ class Account extends Component {
             events = this.state.events
 
         return (
-            <CalendarContainer>
-                <Calendar events={events}/>
-            </CalendarContainer>
+            <>
+                <NewCalendar />
+                <CalendarContainer>
+                    <Calendar events={events}/>
+                </CalendarContainer>
+            </>
         )
     }
 }
