@@ -3,10 +3,12 @@ import axios from 'axios'
 
 import { 
     CalendarContainer,
-    FormImage,
-} from '../../components/Forms/Form.elements'
+    AccountContainer,
+    ParentCalendarContainer
+} from './Account.elements'
 import NewCalendar from './NewCalendar'
 import { Calendar } from '../../components'
+import SideBar from './SideBar';
 
 class Account extends Component {
     _isMounted = false;
@@ -43,12 +45,15 @@ class Account extends Component {
             events = this.state.events
 
         return (
-            <>
+            <AccountContainer>
                 <NewCalendar />
-                <CalendarContainer>
-                    <Calendar events={events}/>
-                </CalendarContainer>
-            </>
+                <ParentCalendarContainer>
+                    <SideBar />
+                    <CalendarContainer>
+                        <Calendar events={events}/>
+                    </CalendarContainer>
+                </ParentCalendarContainer>
+            </AccountContainer>
         )
     }
 }
