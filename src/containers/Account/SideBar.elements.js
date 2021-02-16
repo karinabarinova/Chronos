@@ -2,9 +2,9 @@ import styled from 'styled-components'
 
 export const SidebarContainer = styled.div`
     z-index: 1;
-    width: 30%;
+    width: 25%;
     max-width: 1300px;
-    margin-top: 100px;
+    margin-top: 95px;
     /* margin-left: auto; */
     margin-right: 0;
     padding-right: 50px;

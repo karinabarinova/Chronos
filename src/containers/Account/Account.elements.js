@@ -4,7 +4,7 @@ export const AccountContainer = styled.div`
     z-index: 1;
     width: 100%;
     max-width: 1300px;
-    margin-top: 50px;
+    margin-top: 20px;
     /* margin-left: auto; */
     /* margin-right: auto; */
     padding-right: 50px;
@@ -17,7 +17,7 @@ export const AccountContainer = styled.div`
 `;
 
 export const CalendarContainer = styled.div`
-    margin: 50px auto;
+    margin: 30px auto;
     width: 2000px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
     border-radius: 10px;
