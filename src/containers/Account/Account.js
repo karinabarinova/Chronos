@@ -47,13 +47,10 @@ class Account extends Component {
         this.setState({ creatingMode: true})
     }
 
-    copyEvents(newEvents) {
-        if (!this.state.events.length)
-            this.setState({events: newEvents})
-        else
-            this.setState(({
-                events: [...this.state.events, newEvents]
-            }))
+    copyEvents = (newEvents) => {
+        this.setState({
+            events: this.state.events.concat([newEvents])
+        })
     }
 
     createCancelHander = () => {
@@ -84,6 +81,7 @@ class Account extends Component {
             <AccountContainer>
                 <Modal show={this.state.creatingMode} modalClosed={this.createCancelHander}>
                     <EventView />
+                    {calendars}
                 </Modal>
                 <NewEvent clicked={this.createHandler}/>
                 <ParentCalendarContainer>

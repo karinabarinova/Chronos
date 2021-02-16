@@ -3,29 +3,29 @@ import axios from 'axios'
 
 class SingleCalendar extends Component {
     _isMounted = false;
-    state = {
-        events: []
-    }
+    state = {}
 
     componentDidMount() {
-        this._isMounted = true
-        // this.loadData();
+        this._isMounted = true;
+        this.loadData();
     }
 
-    // loadData() {
-    //     const config = {
-    //         headers: {
-    //             'authorization': `Basic ${localStorage.getItem('token')}`
-    //         }
-    //     }
-    //     axios.get(`/calendars/${id}/events`, config)
-    //         .then(res => {
-    //             if (this._isMounted) {
-    //                 this.setState({ events: res.data })
-    //             }
-    //         })
-    //         .catch(e => console.log(e))
-    // }
+    loadData = () => {
+        const config = {
+            headers: {
+                'authorization': `Basic ${localStorage.getItem('token')}`
+            }
+        }
+        axios.get(`/calendars/${this.props.id}/events`, config)
+            .then(res => {
+                if (this._isMounted) {
+                    res.data.map(data => {
+                        this.props.copyEvents(data)
+                    })
+                }
+            })
+            .catch(e => console.log(e))
+    }
 
     componentWillUnmount() {
         this._isMounted = false

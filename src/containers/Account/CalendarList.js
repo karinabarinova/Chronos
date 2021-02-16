@@ -18,7 +18,6 @@ class CalendarList extends Component {
                 </label>
             })
         }
-        console.log(list)
         return (
             <div
             style={{

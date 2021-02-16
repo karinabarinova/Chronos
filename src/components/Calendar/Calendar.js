@@ -10,7 +10,7 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
 const Calendar = (props) => {
-
+  console.log("Final calender", props)
     return (
         <FullCalendar
         height={650}
