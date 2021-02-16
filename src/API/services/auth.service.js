@@ -211,7 +211,7 @@ async function createDefaultCalendar(id, name) {
         canDelete: false,
         canHide: false
     }
-    const calendar = await db.Calendar.create(params);
+    await db.Calendar.create(params);
 }
 
 async function createHolidaysCalendar(id, ip) {
