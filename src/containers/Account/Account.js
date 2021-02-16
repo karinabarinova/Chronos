@@ -17,7 +17,8 @@ class Account extends Component {
 
     state = {
         calendars: [],
-        creatingMode: false
+        creatingMode: false,
+        events: []
     }
 
     componentDidMount() {
@@ -46,6 +47,19 @@ class Account extends Component {
         this.setState({ creatingMode: true})
     }
 
+    copyEvents(newEvents) {
+        if (!this.state.events.length)
+            this.setState({events: newEvents})
+        else
+            this.setState(({
+                events: [...this.state.events, newEvents]
+            }))
+    }
+
+    createCancelHander = () => {
+        this.setState({creatingMode: false})
+    }
+
     render() {
         let events = null;
         let calendars = null;
@@ -59,6 +73,7 @@ class Account extends Component {
                             color={calendar.color}
                             description={calendar.description}
                             name={calendar.name}
+                            copyEvents={this.copyEvents}
                         />
             })
         }
@@ -67,7 +82,7 @@ class Account extends Component {
 
         return (
             <AccountContainer>
-                <Modal show={this.state.creatingMode}>
+                <Modal show={this.state.creatingMode} modalClosed={this.createCancelHander}>
                     <EventView />
                 </Modal>
                 <NewEvent clicked={this.createHandler}/>
