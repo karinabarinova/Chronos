@@ -6,16 +6,18 @@ import {
     AccountContainer,
     ParentCalendarContainer
 } from './Account.elements'
-import NewCalendar from './NewCalendar'
+import NewEvent from './NewEvent'
 import { Calendar, Modal } from '../../components'
 import SideBar from './SideBar';
 import SingleCalendar from './SingleCalendar'
+import EventView from './EventView';
 
 class Account extends Component {
     _isMounted = false;
 
     state = {
-        calendars: []
+        calendars: [],
+        creatingMode: false
     }
 
     componentDidMount() {
@@ -40,6 +42,10 @@ class Account extends Component {
         this._isMounted = false
     }
 
+    createHandler = () => {
+        this.setState({ creatingMode: true})
+    }
+
     render() {
         let events = null;
         let calendars = null;
@@ -61,8 +67,10 @@ class Account extends Component {
 
         return (
             <AccountContainer>
-                <Modal />
-                <NewCalendar />
+                <Modal show={this.state.creatingMode}>
+                    <EventView />
+                </Modal>
+                <NewEvent clicked={this.createHandler}/>
                 <ParentCalendarContainer>
                     <SideBar calendars={calendars}/>
                     <CalendarContainer>
