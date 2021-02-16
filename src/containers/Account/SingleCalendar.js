@@ -19,9 +19,7 @@ class SingleCalendar extends Component {
         axios.get(`/calendars/${this.props.id}/events`, config)
             .then(res => {
                 if (this._isMounted) {
-                    res.data.map(data => {
-                        this.props.copyEvents(data)
-                    })
+                    this.props.copyEvents(res.data)
                 }
             })
             .catch(e => console.log(e))

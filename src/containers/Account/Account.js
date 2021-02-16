@@ -49,7 +49,7 @@ class Account extends Component {
 
     copyEvents = (newEvents) => {
         this.setState({
-            events: this.state.events.concat([newEvents])
+            events: this.state.events.concat(newEvents)
         })
     }
 
