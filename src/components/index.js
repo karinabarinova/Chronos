@@ -9,4 +9,4 @@ export { default as FormSuccessSignIn } from './Forms/FormSuccess';
 export { default as FormResetPassword } from './Forms/FormResetPassword';
 export { default as FormResetPasswordValidate } from './Forms/FormResetPasswordValidate';
 export { default as Calendar } from './Calendar/Calendar';
-
+export { default as Modal } from './UI/Modal/Modal';

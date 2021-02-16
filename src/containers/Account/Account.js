@@ -7,7 +7,7 @@ import {
     ParentCalendarContainer
 } from './Account.elements'
 import NewCalendar from './NewCalendar'
-import { Calendar } from '../../components'
+import { Calendar, Modal } from '../../components'
 import SideBar from './SideBar';
 import SingleCalendar from './SingleCalendar'
 
@@ -45,25 +45,23 @@ class Account extends Component {
         let calendars = null;
         if (this.state.calendars.length) {
             calendars = this.state.calendars.map(calendar => {
-                console.log(calendar)
                 return <SingleCalendar 
-                        key={calendar.id}
-                        id={calendar.id}
-                        canHide={calendar.canHide}
-                        canDelete={calendar.canDelete}
-                        color={calendar.color}
-                        description={calendar.description}
-                        name={calendar.name}
+                            key={calendar.id}
+                            id={calendar.id}
+                            canHide={calendar.canHide}
+                            canDelete={calendar.canDelete}
+                            color={calendar.color}
+                            description={calendar.description}
+                            name={calendar.name}
                         />
             })
         }
-
-        console.log("Calendars",this.state.calendars)
         if (this.state.events)
             events = this.state.events
 
         return (
             <AccountContainer>
+                <Modal />
                 <NewCalendar />
                 <ParentCalendarContainer>
                     <SideBar calendars={calendars}/>
