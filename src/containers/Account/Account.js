@@ -9,12 +9,13 @@ import {
 import NewCalendar from './NewCalendar'
 import { Calendar } from '../../components'
 import SideBar from './SideBar';
+import SingleCalendar from './SingleCalendar'
 
 class Account extends Component {
     _isMounted = false;
 
     state = {
-        events: []
+        calendars: []
     }
 
     componentDidMount() {
@@ -28,10 +29,10 @@ class Account extends Component {
                 'authorization': `Basic ${localStorage.getItem('token')}`
             }
         }
-        axios.get('/calendars/2/events', config)
+        axios.get('/calendars/', config)
             .then(res => {
                 if (this._isMounted)
-                    this.setState({ events: res.data })
+                    this.setState({ calendars: res.data })
             })
             .catch(e => console.log(e))
     }
@@ -41,6 +42,23 @@ class Account extends Component {
 
     render() {
         let events = null;
+        let calendars = null;
+        if (this.state.calendars.length) {
+            calendars = this.state.calendars.map(calendar => {
+                console.log(calendar)
+                return <SingleCalendar 
+                        key={calendar.id}
+                        id={calendar.id}
+                        canHide={calendar.canHide}
+                        canDelete={calendar.canDelete}
+                        color={calendar.color}
+                        description={calendar.description}
+                        name={calendar.name}
+                        />
+            })
+        }
+
+        console.log("Calendars",this.state.calendars)
         if (this.state.events)
             events = this.state.events
 
@@ -48,7 +66,7 @@ class Account extends Component {
             <AccountContainer>
                 <NewCalendar />
                 <ParentCalendarContainer>
-                    <SideBar />
+                    <SideBar calendars={calendars}/>
                     <CalendarContainer>
                         <Calendar events={events}/>
                     </CalendarContainer>
