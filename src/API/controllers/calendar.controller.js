@@ -59,6 +59,7 @@ function create(req, res, next) {
 function createSchemaEvent(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().empty('').required(),
+        type: Joi.string().empty().valid('arrangement', 'task', 'reminder').required(),
         description: Joi.string().empty(''),
         start: Joi.string().empty('').required(),
         end: Joi.string().empty('')

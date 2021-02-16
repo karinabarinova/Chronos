@@ -13,9 +13,23 @@ function model(sequelize) {
             allowNull: true,
             defaultValue: ''
         },
+        type: {
+            type: DataTypes.ENUM('arrangement', 'task', 'reminder'),
+            allowNull: false,
+        },
         CalendarId: {
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        requireReminder: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        reminderSent: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         },
         defaultDuration: {
             type: DataTypes.STRING,
@@ -25,7 +39,8 @@ function model(sequelize) {
             type: DataTypes.DATE
         },
         end: {
-            type: DataTypes.DATE
+            type: DataTypes.DATE,
+            allowNull: true,
         },
         participants: {
             type: DataTypes.STRING,
