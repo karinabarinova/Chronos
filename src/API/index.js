@@ -20,10 +20,22 @@ app.use('/api/event', require('./controllers/events.controller'))
 //global error handler
 app.use(errorHandler)
 
+const findDifference = (date) => {
+    const now = new Date(Date.now())
+    const start = new Date(date)
+    let findDiff = (start.getTime() - now.getTime()) / 1000;
+    findDiff /= 60;
+    return Math.abs(Math.round(findDiff));
+}
+
 cron.schedule('* * * * *', async function() {
     const events = await db.Events.findAll( {where: {requireReminder: true, reminderSent: false }} )
     if (events) {
-        console.log(events)
+        events.forEach(event => {
+            const diff = findDifference(event.dataValues.start)
+            if (diff <= 20) //if event is in less than 20 minutes
+                console.log('It is time to send some notifications');
+        })
     }
 });
 //start server
