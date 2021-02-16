@@ -235,6 +235,9 @@ async function createHolidaysCalendar(id, ip) {
         await db.Events.create({
             title: data.name,
             description: data.name,
+            type: "holiday",
+            requireReminder: false,
+            reminderSent: false,
             CalendarId: calendar.id,
             defaultDuration: "1 day",
             start: date,

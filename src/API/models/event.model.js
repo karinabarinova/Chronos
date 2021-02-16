@@ -14,7 +14,7 @@ function model(sequelize) {
             defaultValue: ''
         },
         type: {
-            type: DataTypes.ENUM('arrangement', 'task', 'reminder'),
+            type: DataTypes.ENUM('arrangement', 'task', 'reminder', "holiday"),
             allowNull: false,
         },
         CalendarId: {
