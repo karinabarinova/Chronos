@@ -28,7 +28,7 @@ class Account extends Component {
                 'authorization': `Basic ${localStorage.getItem('token')}`
             }
         }
-        axios.get('/calendars/4/events', config)
+        axios.get('/calendars/2/events', config)
             .then(res => {
                 if (this._isMounted)
                     this.setState({ events: res.data })
