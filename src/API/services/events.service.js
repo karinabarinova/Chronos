@@ -26,8 +26,21 @@ async function getById(id, creator) {
 
 async function create(params, creator, CalendarId) {
     const calendar = await getCalendar(CalendarId)
-    if (calendar && calendar.creator === creator)
-        return await db.Events.create({ ...params, CalendarId, defaultDuration: "1 day" })
+    if (calendar && calendar.creator === creator) {
+        const user = await db.User.findByPk(creator);
+        const event = await db.Events.create({ 
+            ...params, 
+            participants: user.email, 
+            CalendarId, 
+            defaultDuration: "1 day" 
+        })
+        if (params.type === "task" || params.type === "reminder") {
+            event.requireReminder = true;
+            event.reminderSent = false;
+            await event.save()
+        }
+        return event;
+    }
     throw 'Unauthorized'
 }
 
