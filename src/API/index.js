@@ -6,7 +6,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error-handler');
-const db = require('./helpers/db');
+const notificationCron = require('./helpers/cron');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -20,42 +20,8 @@ app.use('/api/event', require('./controllers/events.controller'))
 //global error handler
 app.use(errorHandler)
 
-const sendEmail = require('./helpers/send-email')
-
-
-async function sendNotificationEmail(event) {
-    let message =  `<p>Don't forget you have scheduled an event in your calendar: ${event.title}
-                    <p>It will start in less than 20 minutes</p>`
-
-    await sendEmail({
-        to: event.participants,
-        subject: 'Chronos Notification - Upcoming Event',
-        html: `<h4>Upcoming event: ${event.title}</h4>
-               ${message}`
-    });
-}
-
-const findDifference = (date) => {
-    const now = new Date(Date.now())
-    const start = new Date(date)
-    let findDiff = (start.getTime() - now.getTime()) / 1000;
-    findDiff /= 60;
-    return Math.abs(Math.round(findDiff));
-}
-
 cron.schedule('* * * * *', async function() {
-    const events = await db.Events.findAll( {where: {requireReminder: true, reminderSent: false }} )
-    if (events) {
-        events.forEach(async event => {
-            const diff = findDifference(event.dataValues.start)
-            if (diff <= 20) { //if event is in less than 20 minutes
-                console.log('It is time to send some notifications');
-                await sendNotificationEmail(event.dataValues)
-                event.reminderSent = true
-                await event.save()
-            }
-        })
-    }
+    await notificationCron();
 });
 //start server
 const PORT = process.env.PORT || 3001
