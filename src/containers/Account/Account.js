@@ -88,9 +88,9 @@ class Account extends Component {
                     <EventView />
                     {calendars}
                 </Modal>
-                <NewEvent clicked={this.createEventHandler}/>
+                {/* <NewEvent clicked={this.createEventHandler}/> */}
                 <ParentCalendarContainer>
-                    <SideBar calendars={calendars} newcal={this.createCalendarHandler}/>
+                    <SideBar calendars={calendars} newcal={this.createCalendarHandler} clicked={this.createEventHandler}/>
                     <CalendarContainer>
                         <Calendar events={events}/>
                     </CalendarContainer>

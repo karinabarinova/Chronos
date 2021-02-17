@@ -2,12 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     z-index: 1;
-    width: 100vw;
-    max-width: 1500px;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 100px;
-    padding-left: 50px;
 
     @media screen and (max-width: 991px) {
         padding-right: 30px;
@@ -19,7 +13,8 @@ export const Button = styled.button`
     border-radius: 4px;
     background: #0467FB;
     white-space: nowrap;
-    padding: 12px 64px;
+    padding: 12px 32px;
+    margin-bottom: 16px;
     color: #fff;
     font-size: 20px;
     font-weight: 800;

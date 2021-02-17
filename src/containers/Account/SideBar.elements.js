@@ -4,7 +4,7 @@ export const SidebarContainer = styled.div`
     z-index: 1;
     width: 25%;
     max-width: 1300px;
-    margin-top: 95px;
+    margin-top: 70px;
     /* margin-left: auto; */
     margin-right: 0;
     padding-right: 50px;
