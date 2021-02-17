@@ -85,7 +85,7 @@ class Account extends Component {
         return (
             <AccountContainer>
                 <Modal show={this.state.creatingMode} modalClosed={this.createCancelHander}>
-                    <EventView />
+                    <EventView close={this.createCancelHander}/>
                     {calendars}
                 </Modal>
                 {/* <NewEvent clicked={this.createEventHandler}/> */}
