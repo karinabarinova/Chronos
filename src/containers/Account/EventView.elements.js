@@ -41,7 +41,20 @@ export const InputTime = styled.input`
 `;
 
 export const CloseButton = styled.button`
-    padding: 6px;
+    border-radius: 4px;
+    background: #0467FB;
+    white-space: nowrap;
+    padding: 4px 8px;
+    margin-bottom: 8px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    outline: none;
     border: none;
-    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+        transition: all 0.3s ease-out;
+        background: #101522;
+    }
 `;
