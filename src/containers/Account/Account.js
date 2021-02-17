@@ -18,7 +18,9 @@ class Account extends Component {
     state = {
         calendars: [],
         creatingMode: false,
-        events: []
+        events: [],
+        calendarsUpdated: false,
+        eventsUpdated: false
     }
 
     componentDidMount() {
@@ -43,8 +45,11 @@ class Account extends Component {
         this._isMounted = false
     }
 
-    createHandler = () => {
-        this.setState({ creatingMode: true})
+    createEventHandler = () => {
+        this.setState({ creatingMode: true, calendarsUpdated: true})
+    }
+    createCalendarHandler = () => {
+        this.setState({ creatingMode: true, eventsUpdated: true})
     }
 
     copyEvents = (newEvents) => {
@@ -83,9 +88,9 @@ class Account extends Component {
                     <EventView />
                     {calendars}
                 </Modal>
-                <NewEvent clicked={this.createHandler}/>
+                <NewEvent clicked={this.createEventHandler}/>
                 <ParentCalendarContainer>
-                    <SideBar calendars={calendars}/>
+                    <SideBar calendars={calendars} newcal={this.createCalendarHandler}/>
                     <CalendarContainer>
                         <Calendar events={events}/>
                     </CalendarContainer>

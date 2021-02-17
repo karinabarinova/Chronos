@@ -19,3 +19,18 @@ export const SidebarContainer = styled.div`
 export const SidebarTitle = styled.h3`
     margin: 16px;
 `;
+
+export const NewCalendarButton = styled.button`
+    margin-top: 16px;
+    padding: 16px;
+    border: none;
+    background: #fff;
+    color: #0467FB;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+`;
