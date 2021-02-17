@@ -20,7 +20,15 @@ class Account extends Component {
         creatingMode: false,
         events: [],
         calendarsUpdated: false,
-        eventsUpdated: false
+        eventsUpdated: false,
+        loadNewCalendars: false
+    }
+
+    componentDidUpdate() {
+        if (this.state.loadNewCalendars) {
+            this._isMounted = true
+            this.loadData();
+        }
     }
 
     componentDidMount() {
@@ -36,8 +44,9 @@ class Account extends Component {
         }
         axios.get('/calendars/', config)
             .then(res => {
-                if (this._isMounted)
-                    this.setState({ calendars: res.data })
+                if (this._isMounted) {
+                    this.setState({ calendars: res.data, loadNewCalendars: false })
+                }
             })
             .catch(e => console.log(e))
     }
@@ -55,7 +64,11 @@ class Account extends Component {
     copyEvents = (newEvents) => {
         this.setState({
             events: this.state.events.concat(newEvents)
-        })
+        })//TO DO: filter duplicate events
+    }
+
+    loadNewCalendars = () => {
+        this.setState({loadNewCalendars: true})
     }
 
     createCancelHander = () => {
@@ -85,7 +98,7 @@ class Account extends Component {
         return (
             <AccountContainer>
                 <Modal show={this.state.creatingMode} modalClosed={this.createCancelHander}>
-                    <EventView close={this.createCancelHander}/>
+                    <EventView close={this.createCancelHander} calendars={this.state.calendars} loadNewCalendars={this.loadNewCalendars}/>
                     {calendars}
                 </Modal>
                 {/* <NewEvent clicked={this.createEventHandler}/> */}

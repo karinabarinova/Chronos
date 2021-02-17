@@ -3,7 +3,15 @@ import axios from 'axios'
 
 class SingleCalendar extends Component {
     _isMounted = false;
-    state = {}
+    _isUpdated = false;
+    state = {
+        events: []
+    }
+
+    componentDidUpdate(){
+        this._isUpdated = true;
+        this.loadData()
+    }
 
     componentDidMount() {
         this._isMounted = true;
@@ -18,8 +26,13 @@ class SingleCalendar extends Component {
         }
         axios.get(`/calendars/${this.props.id}/events`, config)
             .then(res => {
-                if (this._isMounted) {
-                    this.props.copyEvents(res.data)
+                if (this._isMounted || this._isUpdated) {
+                    if (this.state.events.length !== res.data.length) {
+                        this.setState({events: res.data})
+                        this.props.copyEvents(res.data)
+                    }
+                    // this.props.copyEvents(res.data)
+                    this._isUpdated = false;
                 }
             })
             .catch(e => console.log(e))

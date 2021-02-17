@@ -13,6 +13,7 @@ import { Button } from './NewEvent.elements';
 
 class EventView extends Component {
     state = {
+        calendar: 0,
         title: '',
         description: '',
         type: '',
@@ -24,29 +25,30 @@ class EventView extends Component {
     }
 
     eventCreateHandler = () => {
-        let start = '';
-        start = start.concat(this.state.startDate, " ", this.state.startTime)
-        let end = '';
-        end = end.concat(this.state.endDate, " ", this.state.endTime)
-        const event = {
-            title: this.state.title,
-            description: this.state.description,
-            type: this.state.type,
-            start,
-            end,
-            participants: this.state.participants
+        if (this.state.calendar !== 0) {
+            let start = '';
+            start = start.concat(this.state.startDate, " ", this.state.startTime);
+            let end = '';
+            if (this.state.endTime)
+                end = end.concat(this.state.endDate, " ", this.state.endTime)
+            const event = {
+                title: this.state.title,
+                description: this.state.description,
+                type: this.state.type,
+                start,
+                end,
+                participants: this.state.participants
+            }
+    
+            axios.post(`/calendars/${this.state.calendar}/events`, event, {headers: {
+                'authorization': `Basic ${localStorage.getItem('token')}`
+            }})
+                .then((res) => {
+                    this.props.close()
+                    this.props.loadNewCalendars()
+                })
+                .catch(e => console.log(e))
         }
-
-        console.log(event.start)
-        console.log(event.end)
-
-        // axios.post('/events', event, {headers: {
-        //     'authorization': `Basic ${localStorage.getItem('token')}`
-        // }})
-        //     .then((res) => {
-        //         this.props.close()
-        //     })
-        //     .catch(e => console.log(e))
     }
 
     render() {
@@ -56,7 +58,27 @@ class EventView extends Component {
                     <h3 style={{display: "inline"}}>Create an event</h3>
                     <CloseButton onClick={this.props.close}>x</CloseButton>
                 </TextContainer>
-                
+                    <label>Calendar</label>
+                    <InputBlock>
+                        <select
+                        value={this.state.calendar}
+                        onChange={(event) => this.setState({calendar: event.target.value})}
+                        >
+                            <option value={0}></option>
+                            {this.props.calendars.map(({name, id}, index) => <option key={id} value={id}>{name}</option>)}
+                        </select> 
+                    </InputBlock>
+                    <label>Type</label>
+                    <InputBlock>
+                        <select
+                        value={this.state.type}
+                        onChange={(event) => this.setState({type: event.target.value})}
+                        >
+                            <option value="arrangement">Arrangement</option>
+                            <option value="task">Task</option>
+                            <option value="reminder">Reminder</option>
+                        </select> 
+                    </InputBlock>
                     <label>What do you want to do?</label>
                     <InputBlock>
                         <Input 
@@ -69,8 +91,8 @@ class EventView extends Component {
                     <InputBlock>
                         <Input 
                         type="text" 
-                        value={this.state.title}
-                        onChange={(event) => this.setState({title: event.target.value})}
+                        value={this.state.description}
+                        onChange={(event) => this.setState({description: event.target.value})}
                         placeholder="e.g.: Buy Milk" />
                     </InputBlock>
                     <label>Start:</label>
