@@ -1,5 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {
+    TextContainer,
+    Container, 
+    Input,
+    InputTime,
+    InputBlock,
+    CloseButton
+} from './EventView.elements.js'
+
+import { Button } from './NewEvent.elements';
 
 class EventView extends Component {
     state = {
@@ -41,53 +51,61 @@ class EventView extends Component {
 
     render() {
         return (
-            <div>
-                <div>
-                    <div><h3>Create an event</h3></div>
-                    <button onClick={this.props.close}>x</button>
-                </div>
-                {/* <form> */}
+            <Container>
+                <TextContainer>
+                    <h3 style={{display: "inline"}}>Create an event</h3>
+                    <CloseButton onClick={this.props.close}>x</CloseButton>
+                </TextContainer>
+                
                     <label>What do you want to do?</label>
-                    <div>
-                        <input 
+                    <InputBlock>
+                        <Input 
                         type="text" 
                         value={this.state.title}
                         onChange={(event) => this.setState({title: event.target.value})}
                         placeholder="e.g.: Buy Milk" />
-                    </div>
+                    </InputBlock>
+                    <label>Description</label>
+                    <InputBlock>
+                        <Input 
+                        type="text" 
+                        value={this.state.title}
+                        onChange={(event) => this.setState({title: event.target.value})}
+                        placeholder="e.g.: Buy Milk" />
+                    </InputBlock>
                     <label>Start:</label>
-                    <div>
-                        <input 
+                    <InputBlock>
+                        <InputTime 
                         type="date" 
                         value={this.state.startDate}
                         onChange={(event) => this.setState({startDate: event.target.value})}/>
-                        <input 
+                        <InputTime 
                         type="time"
                         value={this.state.startTime}
                         onChange={(event) => this.setState({startTime: event.target.value})}/> 
-                    </div>
+                    </InputBlock>
                     <label>End:</label>
-                    <div>
-                        <input 
+                    <InputBlock>
+                        <InputTime 
                         type="date" 
                         value={this.state.endDate}
                         onChange={(event) => this.setState({endDate: event.target.value})}/>
-                        <input 
+                        <InputTime 
                         type="time"
                         value={this.state.endTime}
                         onChange={(event) => this.setState({endTime: event.target.value})}/> 
-                    </div>
+                    </InputBlock>
                     <label>Who will participate?</label>
-                    <div>
-                        <input 
+                    <InputBlock>
+                        <Input 
                         type="text" 
                         value={this.state.participants}
+                        placeholder="e.g.: carlos@carlos.com" 
                         onChange={(event) => this.setState({participants: event.target.values})}
                         />
-                    </div>
-                    <button onClick={this.eventCreateHandler}>Submit</button>
-                {/* </form> */}
-            </div>
+                    </InputBlock>
+                    <Button onClick={this.eventCreateHandler}>Submit</Button>
+            </Container>
         )
     }
 }
