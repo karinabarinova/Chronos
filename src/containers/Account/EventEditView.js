@@ -13,6 +13,7 @@ import { Button } from './NewEvent.elements';
 
 class EventEditView extends Component {
     state = {
+        id: '',
         title: '',
         description: '',
         startDate: '',
@@ -22,7 +23,16 @@ class EventEditView extends Component {
         participants: ''
     }
 
+    componentDidUpdate() {
+        if (this.state.id !== this.props.id)
+            this.loadData()
+    }
+
     componentDidMount() {
+        this.loadData();
+    }
+
+    loadData() {
         const config = {
             headers: {
                 'authorization': `Basic ${localStorage.getItem('token')}`
@@ -31,6 +41,7 @@ class EventEditView extends Component {
         axios.get(`/events/${this.props.id}`, config)
             .then(({data}) => {
                 this.setState({
+                    id: this.props.id,
                     title: data.title,
                     description: data.description,
                     participants: data.participants,
