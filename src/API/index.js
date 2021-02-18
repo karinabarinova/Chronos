@@ -16,7 +16,7 @@ app.use(cors({ origin: (origin, callback) => callback(null, true), credentials: 
 app.use('/api/users', require('./controllers/user.controller'))
 app.use('/api/auth', require('./controllers/auth.controller'))
 app.use('/api/calendars', require('./controllers/calendar.controller'))
-app.use('/api/event', require('./controllers/events.controller'))
+app.use('/api/events', require('./controllers/events.controller'))
 //global error handler
 app.use(errorHandler)
 

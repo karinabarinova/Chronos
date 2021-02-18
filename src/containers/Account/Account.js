@@ -11,6 +11,7 @@ import SideBar from './SideBar';
 import SingleCalendar from './SingleCalendar'
 import EventView from './EventView';
 import CalendarView from './CalendarView'
+import EventEditView from './EventEditView'
 
 class Account extends Component {
     _isMounted = false;
@@ -22,7 +23,11 @@ class Account extends Component {
         calendarsUpdated: false,
         eventsUpdated: false,
         loadNewCalendars: false,
-        dateClickedDate: ''
+        dateClickedDate: '',
+        eventEditInfo: false,
+        editingEvent: null,
+        calendarEditInfo: false,
+        editingCalendar: null
     }
 
     componentDidUpdate() {
@@ -46,7 +51,15 @@ class Account extends Component {
         axios.get('/calendars/', config)
             .then(res => {
                 if (this._isMounted) {
-                    this.setState({ calendars: res.data, loadNewCalendars: false, dateClickedDate: '' })
+                    this.setState({ 
+                        calendars: res.data, 
+                        loadNewCalendars: false, 
+                        dateClickedDate: '', 
+                        editingEvent: null, 
+                        editingCalendar: null,
+                        eventEditInfo: false,
+                        calendarEditInfo: false 
+                    })
                 }
             })
             .catch(e => console.log(e))
@@ -57,6 +70,9 @@ class Account extends Component {
 
     createEventHandler = () => {
         this.setState({ creatingMode: true, eventsUpdated: true, calendarsUpdated: false})
+    }
+    editEventHandler = (id) => {
+        this.setState({ creatingMode: true, editingEvent: id, eventEditInfo: true })
     }
     dateClicked = (date) => {
         this.setState({ creatingMode: true, eventsUpdated: true, calendarsUpdated: false, dateClickedDate: date})
@@ -106,13 +122,13 @@ class Account extends Component {
                     <EventView close={this.createCancelHander} calendars={this.state.calendars} loadNewCalendars={this.loadNewCalendars} date={this.state.dateClickedDate}/> 
                     : null}
                     {this.state.calendarsUpdated ? <CalendarView close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} /> : null}
+                    {this.state.eventEditInfo ? <EventEditView  id={this.state.editingEvent} close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars}/> : null}
                     {calendars}
                 </Modal>
-                {/* <NewEvent clicked={this.createEventHandler}/> */}
                 <ParentCalendarContainer>
                     <SideBar calendars={calendars} newcal={this.createCalendarHandler} clicked={this.createEventHandler}/>
                     <CalendarContainer>
-                        <Calendar events={events} dateClicked={this.dateClicked}/>
+                        <Calendar events={events} dateClicked={this.dateClicked} eventClicked={this.editEventHandler}/>
                     </CalendarContainer>
                 </ParentCalendarContainer>
             </AccountContainer>

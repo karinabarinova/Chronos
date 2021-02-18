@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const Button = styled.button`
     border-radius: 4px;
-    background: #0467FB;
+    background: ${({danger}) => (danger ? '#101522' : '#0467FB')} ;
     white-space: nowrap;
     padding: 12px 32px;
     margin-bottom: 16px;

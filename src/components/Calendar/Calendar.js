@@ -14,6 +14,11 @@ const Calendar = (props) => {
 	const handleDateClick = arg => {
 		props.dateClicked(arg.dateStr);
 	}
+
+	const handleEventClick = info => {
+		props.eventClicked(parseInt(info.event._def.publicId))
+	}
+
     return (
         <FullCalendar
         height={650}
@@ -45,7 +50,8 @@ const Calendar = (props) => {
         //     right: "dayGridMonth,timeGridWeek,timeGridDay"
         // }}
         events={props.events}
-        dateClick={handleDateClick}
+		dateClick={handleDateClick}
+		eventClick={handleEventClick}
       />
     )
 }
