@@ -101,7 +101,7 @@ class Account extends Component {
                     {this.state.eventsUpdated ? 
                     <EventView close={this.createCancelHander} calendars={this.state.calendars} loadNewCalendars={this.loadNewCalendars}/> 
                     : null}
-                    {this.state.calendarsUpdated ? <CalendarView /> : null}
+                    {this.state.calendarsUpdated ? <CalendarView close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} /> : null}
                     {calendars}
                 </Modal>
                 {/* <NewEvent clicked={this.createEventHandler}/> */}

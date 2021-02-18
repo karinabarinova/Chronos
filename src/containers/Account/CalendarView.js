@@ -4,7 +4,9 @@ import {
     TextContainer,
     Container, 
     Input,
-    InputTime,
+    InputColor,
+    InputDescription,
+    InputBlockFlex,
     InputBlock,
     CloseButton
 } from './EventView.elements.js'
@@ -15,7 +17,7 @@ class CalendarView extends Component {
     state = {
         name: '',
         description: '',
-        color: '',
+        color: '#1db58f',
         participants: ''
     }
 
@@ -31,8 +33,8 @@ class CalendarView extends Component {
             'authorization': `Basic ${localStorage.getItem('token')}`
         }})
             .then((res) => {
-                // this.props.close()
-                // this.props.loadNewCalendars()
+                this.props.loadNewCalendars()
+                this.props.close()
             })
             .catch(e => console.log(e))
     }
@@ -50,24 +52,25 @@ class CalendarView extends Component {
                         type="text" 
                         value={this.state.name}
                         onChange={(event) => this.setState({name: event.target.value})}
-                        placeholder="e.g.: Buy Milk" />
+                        placeholder="e.g.: Work" />
                     </InputBlock>
                     <label>Description</label>
+                    <InputBlockFlex>
                     <InputBlock>
-                        <Input 
+                        <InputDescription 
                         type="text" 
                         value={this.state.description}
                         onChange={(event) => this.setState({description: event.target.value})}
-                        placeholder="e.g.: Buy Milk" />
+                        placeholder="e.g.: Work-related tasks" />
                     </InputBlock>
-                    <label>Color</label>
                     <InputBlock>
-                        <Input 
+                        <InputColor 
                         type="color" 
                         value={this.state.color}
                         onChange={(event) => this.setState({color: event.target.value})}
                         placeholder="e.g.: Buy Milk" />
                     </InputBlock>
+                    </InputBlockFlex>
                     <label>Who will participate?</label>
                     <InputBlock>
                         <Input 

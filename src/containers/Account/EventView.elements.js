@@ -30,6 +30,31 @@ export const Input = styled.input`
     height: 2.5rem;
 `;
 
+export const InputBlockFlex = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+`;
+
+export const InputColor = styled.input`
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 1ch;
+    width: 50px;
+    /* width: 100%; */
+    height: 2.5rem;
+`;
+
+export const InputDescription = styled.input`
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 1ch;
+    width: 25vw;
+    height: 2.5rem;
+`;
+
 export const InputTime = styled.input`
     font-size: 16px;
     border: 1px solid #ccc;
