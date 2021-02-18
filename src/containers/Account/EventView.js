@@ -99,12 +99,14 @@ class EventView extends Component {
                     <label>Start:</label>
                     <InputBlock>
                         <DateTimePicker 
+                        format={"y-MM-dd h:mm:ss"}
                         value={this.state.start}
                         onChange={(value) => this.setState({start: value})}/>
                     </InputBlock>
                     <label>End:</label>
                     <InputBlock>
                         <DateTimePicker 
+                        format={"y-MM-dd h:mm:ss"}
                         value={this.state.end}
                         onChange={(value) => this.setState({end: value})}/>
                     </InputBlock>

@@ -66,7 +66,7 @@ class EventEditView extends Component {
                 .then((res) => {
                     this.props.close()
                     this.props.loadNewCalendars()
-                    this.setState({startDate: ''})
+                    this.setState({start: ''})
                 })
                 .catch(e => console.log(e))
     }
@@ -109,12 +109,15 @@ class EventEditView extends Component {
                     <label>Start:</label>
                     <InputBlock>
                         <DateTimePicker 
+                        format={"y-MM-dd h:mm:ss"}
+                        // autoFocus={true}
                         value={this.state.start}
                         onChange={(value) => this.setState({start: value})}/>
                     </InputBlock>
                     <label>End:</label>
                     <InputBlock>
                         <DateTimePicker 
+                        format={"y-MM-dd h:mm:ss"}
                         value={this.state.end}
                         onChange={(value) => this.setState({endDate: value})}/>
                     </InputBlock>
