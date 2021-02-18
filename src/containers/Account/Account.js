@@ -69,16 +69,16 @@ class Account extends Component {
     }
 
     createEventHandler = () => {
-        this.setState({ creatingMode: true, eventsUpdated: true, calendarsUpdated: false})
+        this.setState({ creatingMode: true, eventsUpdated: true, calendarsUpdated: false, eventEditInfo: false})
     }
     editEventHandler = (id) => {
-        this.setState({ creatingMode: true, editingEvent: id, eventEditInfo: true })
+        this.setState({ creatingMode: true, editingEvent: id, eventEditInfo: true, eventsUpdated: false, calendarsUpdated: false })
     }
     dateClicked = (date) => {
-        this.setState({ creatingMode: true, eventsUpdated: true, calendarsUpdated: false, dateClickedDate: date})
+        this.setState({ creatingMode: true, eventsUpdated: true, calendarsUpdated: false, dateClickedDate: date, eventEditInfo: false})
     }
     createCalendarHandler = () => {
-        this.setState({ creatingMode: true, calendarsUpdated: true, eventsUpdated: false})
+        this.setState({ creatingMode: true, calendarsUpdated: true, eventsUpdated: false, eventEditInfo: false})
     }
 
     copyEvents = (newEvents) => {

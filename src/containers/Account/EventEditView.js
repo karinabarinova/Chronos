@@ -84,12 +84,6 @@ class EventEditView extends Component {
     }
 
     render() {
-        let options = null;
-        if (this.props.calendars) {
-            options = this.props.calendars.map(({name, id}, index) => <option key={id} value={id}>{name}</option>)
-            if (this.state.calendar != options[0].props.value)
-            this.setState({calendar: options[0].props.value})
-        }
         return (
             <Container>
                 <TextContainer>
