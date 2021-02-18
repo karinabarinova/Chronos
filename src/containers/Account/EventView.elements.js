@@ -30,6 +30,15 @@ export const Input = styled.input`
     height: 2.5rem;
 `;
 
+export const Select = styled.select`
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 1ch;
+    width: 100%;
+    height: 2.5rem;
+`;
+
 export const InputBlockFlex = styled.div`
     display: flex;
     width: 100%;

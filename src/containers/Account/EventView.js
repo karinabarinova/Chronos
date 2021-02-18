@@ -6,7 +6,8 @@ import {
     Input,
     InputTime,
     InputBlock,
-    CloseButton
+    CloseButton,
+    Select
 } from './EventView.elements.js'
 
 import { Button } from './NewEvent.elements';
@@ -72,40 +73,37 @@ class EventView extends Component {
                 </TextContainer>
                     <label>Calendar</label>
                     <InputBlock>
-                        <select
+                        <Select
                         defaultValue={options[0].props.value}
                         value={this.state.calendar}
                         onChange={(event) => this.setState({calendar: event.target.value})}
                         >
                             {options}
-                        </select> 
+                        </Select> 
                     </InputBlock>
-                    <label>Type</label>
                     <InputBlock>
-                        <select
+                        <Select
                         value={this.state.type}
                         onChange={(event) => this.setState({type: event.target.value})}
                         >
                             <option value="arrangement">Arrangement</option>
                             <option value="task">Task</option>
                             <option value="reminder">Reminder</option>
-                        </select> 
+                        </Select> 
                     </InputBlock>
-                    <label>What do you want to do?</label>
                     <InputBlock>
                         <Input 
                         type="text" 
                         value={this.state.title}
                         onChange={(event) => this.setState({title: event.target.value})}
-                        placeholder="e.g.: Buy Milk" />
+                        placeholder="What do you want to do?" />
                     </InputBlock>
-                    <label>Description</label>
                     <InputBlock>
                         <Input 
                         type="text" 
                         value={this.state.description}
                         onChange={(event) => this.setState({description: event.target.value})}
-                        placeholder="e.g.: Buy Milk" />
+                        placeholder="Description" />
                     </InputBlock>
                     <label>Start:</label>
                     <InputBlock>
