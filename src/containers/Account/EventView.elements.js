@@ -64,16 +64,6 @@ export const InputDescription = styled.input`
     height: 2.5rem;
 `;
 
-export const InputTime = styled.input`
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 1ch;
-
-    width: 50%;
-    padding: 8px;
-    height: 2.5rem;
-`;
-
 export const CloseButton = styled.button`
     border-radius: 4px;
     background: #0467FB;

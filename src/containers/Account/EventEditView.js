@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import DateTimePicker from 'react-datetime-picker';
 import axios from 'axios'
 import {
     TextContainer,
     Container, 
     Input,
-    InputTime,
     InputBlock,
     CloseButton,
 } from './EventView.elements.js'
@@ -16,10 +16,8 @@ class EventEditView extends Component {
         id: '',
         title: '',
         description: '',
-        startDate: '',
-        startTime: '',
-        endDate: '',
-        endTime: '',
+        start: '',
+        end: '',
         participants: ''
     }
 
@@ -45,39 +43,32 @@ class EventEditView extends Component {
                     title: data.title,
                     description: data.description,
                     participants: data.participants,
-                    // startDate: data.start,
-                    // endDate: data.end
+                    start: data.start,
+                    end: data.end
                 })
             })
             .catch(e => console.log(e))
     }
 
     eventEditHandler = () => {
-        if (this.state.calendar !== 0) {
-            let start = '';
-            start = start.concat(this.state.startDate, " ", this.state.startTime);
-            let end = '';
-            if (this.state.endTime)
-                end = end.concat(this.state.endDate, " ", this.state.endTime)
             const event = {
                 title: this.state.title,
                 description: this.state.description,
                 type: this.state.type,
-                start,
-                end,
+                start: this.state.start,
+                end: this.state.end,
                 participants: this.state.participants
             }
     
-            // axios.patch(`/events/${this.props.id}`, event, {headers: {
-            //     'authorization': `Basic ${localStorage.getItem('token')}`
-            // }})
-            //     .then((res) => {
-            //         this.props.close()
-            //         this.props.loadNewCalendars()
-            //         this.setState({startDate: ''})
-            //     })
-            //     .catch(e => console.log(e))
-        }
+            axios.patch(`/events/${this.props.id}`, event, {headers: {
+                'authorization': `Basic ${localStorage.getItem('token')}`
+            }})
+                .then((res) => {
+                    this.props.close()
+                    this.props.loadNewCalendars()
+                    this.setState({startDate: ''})
+                })
+                .catch(e => console.log(e))
     }
 
     eventDeleteHandler = () => {
@@ -117,25 +108,15 @@ class EventEditView extends Component {
                     </InputBlock>
                     <label>Start:</label>
                     <InputBlock>
-                        <InputTime 
-                        type="date" 
-                        value={this.state.startDate}
-                        onChange={(event) => this.setState({startDate: event.target.value})}/>
-                        <InputTime 
-                        type="time"
-                        value={this.state.startTime}
-                        onChange={(event) => this.setState({startTime: event.target.value})}/> 
+                        <DateTimePicker 
+                        value={this.state.start}
+                        onChange={(value) => this.setState({start: value})}/>
                     </InputBlock>
                     <label>End:</label>
                     <InputBlock>
-                        <InputTime 
-                        type="date" 
-                        value={this.state.endDate}
-                        onChange={(event) => this.setState({endDate: event.target.value})}/>
-                        <InputTime 
-                        type="time"
-                        value={this.state.endTime}
-                        onChange={(event) => this.setState({endTime: event.target.value})}/> 
+                        <DateTimePicker 
+                        value={this.state.end}
+                        onChange={(value) => this.setState({endDate: value})}/>
                     </InputBlock>
                     <label>Who will participate?</label>
                     <InputBlock>
