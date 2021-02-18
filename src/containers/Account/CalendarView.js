@@ -44,7 +44,7 @@ class CalendarView extends Component {
                     <h3 style={{display: "inline"}}>Create a calendar</h3>
                     <CloseButton onClick={this.props.close}>x</CloseButton>
                 </TextContainer>
-                    <label>fullName</label>
+                    <label>Name</label>
                     <InputBlock>
                         <Input 
                         type="text" 

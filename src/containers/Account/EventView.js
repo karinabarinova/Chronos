@@ -13,10 +13,10 @@ import { Button } from './NewEvent.elements';
 
 class EventView extends Component {
     state = {
-        calendar: 0,
+        calendar: null,
         title: '',
         description: '',
-        type: '',
+        type: 'arrangement',
         startDate: '',
         startTime: '',
         endDate: '',
@@ -52,6 +52,12 @@ class EventView extends Component {
     }
 
     render() {
+        let options = null;
+        if (this.props.calendars) {
+            options = this.props.calendars.map(({name, id}, index) => <option key={id} value={id}>{name}</option>)
+            if (this.state.calendar != options[0].props.value)
+            this.setState({calendar: options[0].props.value})
+        }
         return (
             <Container>
                 <TextContainer>
@@ -61,11 +67,11 @@ class EventView extends Component {
                     <label>Calendar</label>
                     <InputBlock>
                         <select
+                        defaultValue={options[0].props.value}
                         value={this.state.calendar}
                         onChange={(event) => this.setState({calendar: event.target.value})}
                         >
-                            <option value={0}></option>
-                            {this.props.calendars.map(({name, id}, index) => <option key={id} value={id}>{name}</option>)}
+                            {options}
                         </select> 
                     </InputBlock>
                     <label>Type</label>
