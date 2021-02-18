@@ -15,6 +15,7 @@ import { Button } from './NewEvent.elements';
 
 class CalendarEditView extends Component {
     state = {
+        id: '',
         name: '',
         description: '',
         color: '',
@@ -22,7 +23,16 @@ class CalendarEditView extends Component {
         canDelete: false
     }
 
+    componentDidUpdate() {
+        if (this.state.id !== this.props.id)
+            this.loadData()
+    }
+
     componentDidMount() {
+        this.loadData();
+    }
+
+    loadData = () => {
         const config = {
             headers: {
                 'authorization': `Basic ${localStorage.getItem('token')}`
@@ -31,9 +41,10 @@ class CalendarEditView extends Component {
         axios.get(`/calendars/${this.props.id}`, config)
             .then(({data}) => {
                 this.setState({
+                    id: this.props.id,
                     name: data.name,
                     description: data.description,
-                    participants: data.participants,
+                    participants: data.participants, //error when participants on server is null
                     color: data.color,
                     canDelete: data.canDelete
                 })

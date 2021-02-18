@@ -75,13 +75,14 @@ class Account extends Component {
             eventsUpdated: true, 
             calendarsUpdated: false, 
             eventEditInfo: false, 
-            calendarEditInfo: false
+            calendarEditInfo: false,
         })
     }
     editEventHandler = (id) => {
         this.setState({ 
             creatingMode: true, 
             editingEvent: id, 
+            editingCalendar: null,
             eventEditInfo: true, 
             eventsUpdated: false, 
             calendarsUpdated: false, 
@@ -91,7 +92,8 @@ class Account extends Component {
     editCalendarHandler = (id) => {
         this.setState({ 
             creatingMode: true, 
-            editingCalendar: id, 
+            editingCalendar: id,
+            editingEvent: null, 
             calendarEditInfo: true, 
             eventEditInfo: false, 
             eventsUpdated: false, 
@@ -105,7 +107,7 @@ class Account extends Component {
             calendarsUpdated: false, 
             dateClickedDate: date, 
             eventEditInfo: false, 
-            calendarEditInfo: false
+            calendarEditInfo: false,
         })
     }
     createCalendarHandler = () => {
@@ -114,7 +116,7 @@ class Account extends Component {
             calendarsUpdated: true, 
             eventsUpdated: false, 
             eventEditInfo: false, 
-            calendarEditInfo: false
+            calendarEditInfo: false,
         })
     }
 
@@ -130,9 +132,7 @@ class Account extends Component {
 
     createCancelHander = () => {
         this.setState({
-            creatingMode: false 
-            // editingEvent: null, 
-            // editingCalendar: null
+            creatingMode: false
         })
     }
 
