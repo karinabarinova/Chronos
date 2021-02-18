@@ -21,7 +21,8 @@ class Account extends Component {
         events: [],
         calendarsUpdated: false,
         eventsUpdated: false,
-        loadNewCalendars: false
+        loadNewCalendars: false,
+        dateClickedDate: ''
     }
 
     componentDidUpdate() {
@@ -45,7 +46,7 @@ class Account extends Component {
         axios.get('/calendars/', config)
             .then(res => {
                 if (this._isMounted) {
-                    this.setState({ calendars: res.data, loadNewCalendars: false })
+                    this.setState({ calendars: res.data, loadNewCalendars: false, dateClickedDate: '' })
                 }
             })
             .catch(e => console.log(e))
@@ -56,6 +57,9 @@ class Account extends Component {
 
     createEventHandler = () => {
         this.setState({ creatingMode: true, eventsUpdated: true, calendarsUpdated: false})
+    }
+    dateClicked = (date) => {
+        this.setState({ creatingMode: true, eventsUpdated: true, calendarsUpdated: false, dateClickedDate: date})
     }
     createCalendarHandler = () => {
         this.setState({ creatingMode: true, calendarsUpdated: true, eventsUpdated: false})
@@ -99,7 +103,7 @@ class Account extends Component {
             <AccountContainer>
                 <Modal show={this.state.creatingMode} modalClosed={this.createCancelHander}>
                     {this.state.eventsUpdated ? 
-                    <EventView close={this.createCancelHander} calendars={this.state.calendars} loadNewCalendars={this.loadNewCalendars}/> 
+                    <EventView close={this.createCancelHander} calendars={this.state.calendars} loadNewCalendars={this.loadNewCalendars} date={this.state.dateClickedDate}/> 
                     : null}
                     {this.state.calendarsUpdated ? <CalendarView close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} /> : null}
                     {calendars}
@@ -108,7 +112,7 @@ class Account extends Component {
                 <ParentCalendarContainer>
                     <SideBar calendars={calendars} newcal={this.createCalendarHandler} clicked={this.createEventHandler}/>
                     <CalendarContainer>
-                        <Calendar events={events}/>
+                        <Calendar events={events} dateClicked={this.dateClicked}/>
                     </CalendarContainer>
                 </ParentCalendarContainer>
             </AccountContainer>

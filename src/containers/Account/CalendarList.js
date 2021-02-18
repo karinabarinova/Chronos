@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Checkbox from './CalendarList.elements';
 
 class CalendarList extends Component {
-    // state = {check: true}
+    state = {check: true}
 
     handleCheckBoxChange = (event) => {
         this.setState({ checked: event.target.checked })

@@ -10,6 +10,10 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
 const Calendar = (props) => {
+
+	const handleDateClick = arg => {
+		props.dateClicked(arg.dateStr);
+	}
     return (
         <FullCalendar
         height={650}
@@ -41,6 +45,7 @@ const Calendar = (props) => {
         //     right: "dayGridMonth,timeGridWeek,timeGridDay"
         // }}
         events={props.events}
+        dateClick={handleDateClick}
       />
     )
 }

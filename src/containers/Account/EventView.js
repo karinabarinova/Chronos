@@ -24,6 +24,11 @@ class EventView extends Component {
         participants: ''
     }
 
+    componentDidMount() {
+        if (this.props.date)
+            this.setState({startDate: this.props.date})
+    }
+
     eventCreateHandler = () => {
         if (this.state.calendar !== 0) {
             let start = '';
@@ -46,6 +51,7 @@ class EventView extends Component {
                 .then((res) => {
                     this.props.close()
                     this.props.loadNewCalendars()
+                    this.setState({startDate: ''})
                 })
                 .catch(e => console.log(e))
         }
