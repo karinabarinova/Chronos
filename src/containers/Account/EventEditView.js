@@ -141,7 +141,7 @@ class EventEditView extends Component {
                         onChange={(event) => this.setState({participants: event.target.values})}
                         />
                     </InputBlock>
-                    <Button onClick={this.eventCreateHandler} danger={false}>Update</Button>
+                    <Button onClick={this.eventEditHandler} danger={false}>Update</Button>
                     <Button onClick={this.eventDeleteHandler} danger={true}>Delete</Button>
             </Container>
         )
