@@ -51,9 +51,8 @@ const Checkbox = ({ className, canHide, ...props }) => {
     //     changeChecked(!checked);
     // }
 
-
     return (
-        <CheckboxContainer className={className} onChange={() => canHide ? changeChecked(!checked) : "return false"}>
+        <CheckboxContainer className={className} onClick={() => canHide ? changeChecked(!checked) : "return false"}>
             <HiddenCheckbox checked={checked} {...props} />
             <StyledCheckbox checked={checked}>
             <Icon viewBox="0 0 24 24">
