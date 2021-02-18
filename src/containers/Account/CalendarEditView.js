@@ -13,15 +13,35 @@ import {
 
 import { Button } from './NewEvent.elements';
 
-class CalendarView extends Component {
+class CalendarEditView extends Component {
     state = {
         name: '',
         description: '',
-        color: '#1db58f',
-        participants: ''
+        color: '',
+        participants: '',
+        canDelete: false
     }
 
-    calendarCreateHandler = () => {
+    componentDidMount() {
+        const config = {
+            headers: {
+                'authorization': `Basic ${localStorage.getItem('token')}`
+            }
+        }
+        axios.get(`/calendars/${this.props.id}`, config)
+            .then(({data}) => {
+                this.setState({
+                    name: data.name,
+                    description: data.description,
+                    participants: data.participants,
+                    color: data.color,
+                    canDelete: data.canDelete
+                })
+            })
+            .catch(e => console.log(e))
+    }
+
+    calendarEditHandler = () => {
         const calendar = {
             name: this.state.name,
             description: this.state.description,
@@ -29,10 +49,24 @@ class CalendarView extends Component {
             participants: this.state.participants
         };
     
-        axios.post(`/calendars/`, calendar, {headers: {
+        axios.patch(`/calendars/${this.props.id}`, calendar, {headers: {
             'authorization': `Basic ${localStorage.getItem('token')}`
         }})
             .then((res) => {
+                this.props.loadNewCalendars()
+                this.props.close()
+            })
+            .catch(e => console.log(e))
+    }
+
+    calendarDeleteHandler = () => {
+        const config = {
+            headers: {
+                'authorization': `Basic ${localStorage.getItem('token')}`
+            }
+        }
+        axios.delete(`/calendars/${this.props.id}`, config)
+            .then(res => {
                 this.props.loadNewCalendars()
                 this.props.close()
             })
@@ -52,7 +86,7 @@ class CalendarView extends Component {
                         type="text" 
                         value={this.state.name}
                         onChange={(event) => this.setState({name: event.target.value})}
-                        placeholder="e.g.: Work" />
+                        />
                     </InputBlock>
                     <label>Description</label>
                     <InputBlockFlex>
@@ -61,7 +95,7 @@ class CalendarView extends Component {
                         type="text" 
                         value={this.state.description}
                         onChange={(event) => this.setState({description: event.target.value})}
-                        placeholder="e.g.: Work-related tasks" />
+                        />
                     </InputBlock>
                     <InputBlock>
                         <InputColor 
@@ -76,14 +110,14 @@ class CalendarView extends Component {
                         <Input 
                         type="text" 
                         value={this.state.participants}
-                        placeholder="e.g.: carlos@carlos.com" 
                         onChange={(event) => this.setState({participants: event.target.values})}
                         />
                     </InputBlock>
-                    <Button onClick={this.calendarCreateHandler}>Submit</Button>
+                    <Button onClick={this.calendarEditHandler} danger={false}>Update</Button>
+                    {this.state.canDelete ? <Button onClick={this.calendarDeleteHandler} danger={true}>Delete</Button> : null}
             </Container>
         )
     }
 }
 
-export default CalendarView
+export default CalendarEditView

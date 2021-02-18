@@ -95,14 +95,14 @@ class EventEditView extends Component {
                         type="text" 
                         value={this.state.title}
                         onChange={(event) => this.setState({title: event.target.value})}
-                        placeholder="What do you want to do?" />
+                        />
                     </InputBlock>
                     <InputBlock>
                         <Input 
                         type="text" 
                         value={this.state.description}
                         onChange={(event) => this.setState({description: event.target.value})}
-                        placeholder="Description" />
+                        />
                     </InputBlock>
                     <label>Start:</label>
                     <InputBlock>
@@ -131,7 +131,6 @@ class EventEditView extends Component {
                         <Input 
                         type="text" 
                         value={this.state.participants}
-                        placeholder="e.g.: carlos@carlos.com" 
                         onChange={(event) => this.setState({participants: event.target.values})}
                         />
                     </InputBlock>

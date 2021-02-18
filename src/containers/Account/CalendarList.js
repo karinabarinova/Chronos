@@ -8,6 +8,10 @@ class CalendarList extends Component {
         this.setState({ checked: event.target.checked })
     }
 
+    editCalendar = (id) => {
+        this.props.editCalendar(id)
+    }
+
     render() {
         let list = null;
         if (this.props.calendars) {
@@ -15,7 +19,7 @@ class CalendarList extends Component {
                 return (
                     <div key={calendar.props.id}>
                             <Checkbox id={calendar.props.id} onChange={this.handleCheckBoxChange} canHide={calendar.props.canHide}/>
-                            <span style={{marginLeft: 8}}>{calendar.props.name}</span>
+                            <span onClick={() => this.editCalendar(calendar.props.id)} style={{marginLeft: 8, cursor: "pointer"}}>{calendar.props.name}</span>
                     </div>
                 )
             })

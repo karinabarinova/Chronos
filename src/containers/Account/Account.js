@@ -12,6 +12,7 @@ import SingleCalendar from './SingleCalendar'
 import EventView from './EventView';
 import CalendarView from './CalendarView'
 import EventEditView from './EventEditView'
+import CalendarEditView from './CalendarEditView'
 
 class Account extends Component {
     _isMounted = false;
@@ -69,16 +70,52 @@ class Account extends Component {
     }
 
     createEventHandler = () => {
-        this.setState({ creatingMode: true, eventsUpdated: true, calendarsUpdated: false, eventEditInfo: false})
+        this.setState({ 
+            creatingMode: true, 
+            eventsUpdated: true, 
+            calendarsUpdated: false, 
+            eventEditInfo: false, 
+            calendarEditInfo: false
+        })
     }
     editEventHandler = (id) => {
-        this.setState({ creatingMode: true, editingEvent: id, eventEditInfo: true, eventsUpdated: false, calendarsUpdated: false })
+        this.setState({ 
+            creatingMode: true, 
+            editingEvent: id, 
+            eventEditInfo: true, 
+            eventsUpdated: false, 
+            calendarsUpdated: false, 
+            calendarEditInfo: false 
+        })
+    }
+    editCalendarHandler = (id) => {
+        this.setState({ 
+            creatingMode: true, 
+            editingCalendar: id, 
+            calendarEditInfo: true, 
+            eventEditInfo: false, 
+            eventsUpdated: false, 
+            calendarsUpdated: false 
+        })
     }
     dateClicked = (date) => {
-        this.setState({ creatingMode: true, eventsUpdated: true, calendarsUpdated: false, dateClickedDate: date, eventEditInfo: false})
+        this.setState({ 
+            creatingMode: true, 
+            eventsUpdated: true, 
+            calendarsUpdated: false, 
+            dateClickedDate: date, 
+            eventEditInfo: false, 
+            calendarEditInfo: false
+        })
     }
     createCalendarHandler = () => {
-        this.setState({ creatingMode: true, calendarsUpdated: true, eventsUpdated: false, eventEditInfo: false})
+        this.setState({ 
+            creatingMode: true, 
+            calendarsUpdated: true, 
+            eventsUpdated: false, 
+            eventEditInfo: false, 
+            calendarEditInfo: false
+        })
     }
 
     copyEvents = (newEvents) => {
@@ -92,7 +129,11 @@ class Account extends Component {
     }
 
     createCancelHander = () => {
-        this.setState({creatingMode: false})
+        this.setState({
+            creatingMode: false 
+            // editingEvent: null, 
+            // editingCalendar: null
+        })
     }
 
     render() {
@@ -123,10 +164,11 @@ class Account extends Component {
                     : null}
                     {this.state.calendarsUpdated ? <CalendarView close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} /> : null}
                     {this.state.eventEditInfo ? <EventEditView  id={this.state.editingEvent} close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars}/> : null}
+                    {this.state.calendarEditInfo ? <CalendarEditView id={this.state.editingCalendar} close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} /> : null}
                     {calendars}
                 </Modal>
                 <ParentCalendarContainer>
-                    <SideBar calendars={calendars} newcal={this.createCalendarHandler} clicked={this.createEventHandler}/>
+                    <SideBar calendars={calendars} newcal={this.createCalendarHandler} clicked={this.createEventHandler} editCalendar={this.editCalendarHandler}/>
                     <CalendarContainer>
                         <Calendar events={events} dateClicked={this.dateClicked} eventClicked={this.editEventHandler}/>
                     </CalendarContainer>
