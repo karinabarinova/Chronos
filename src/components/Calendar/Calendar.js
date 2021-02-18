@@ -16,6 +16,7 @@ const Calendar = (props) => {
 	}
 
 	const handleEventClick = info => {
+		// console.log(info);
 		props.eventClicked(parseInt(info.event._def.publicId))
 	}
 

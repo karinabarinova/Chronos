@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import DateTimePicker from 'react-datetime-picker';
+
 import axios from 'axios'
 import {
     TextContainer,
     Container, 
     Input,
+    InputTime,
     InputBlock,
     CloseButton,
     Select
@@ -18,23 +19,30 @@ class EventView extends Component {
         title: '',
         description: '',
         type: 'arrangement',
-        start: '',
-        end: '',
+        startDate: '',
+        startTime: '',
+        endDate: '',
+        endTime: '',
         participants: ''
     }
 
     componentDidMount() {
         if (this.props.date)
-            this.setState({start: this.props.date})
+            this.setState({startDate: this.props.date})
     }
 
     eventCreateHandler = () => {
+            let start = '';
+            start = start.concat(this.state.startDate, " ", this.state.startTime);
+            let end = '';
+            if (this.state.endTime)
+                end = end.concat(this.state.endDate, " ", this.state.endTime)
             const event = {
                 title: this.state.title,
                 description: this.state.description,
                 type: this.state.type,
-                start: this.state.start,
-                end: this.state.end,
+                start,
+                end,
                 participants: this.state.participants
             }
     
@@ -44,7 +52,7 @@ class EventView extends Component {
                 .then((res) => {
                     this.props.close()
                     this.props.loadNewCalendars()
-                    this.setState({start: ''})
+                    this.setState({startDate: ''})
                 })
                 .catch(e => console.log(e))
     }
@@ -98,17 +106,25 @@ class EventView extends Component {
                     </InputBlock>
                     <label>Start:</label>
                     <InputBlock>
-                        <DateTimePicker 
-                        format={"y-MM-dd h:mm:ss"}
-                        value={this.state.start}
-                        onChange={(value) => this.setState({start: value})}/>
+                        <InputTime 
+                        type="date" 
+                        value={this.state.startDate}
+                        onChange={(event) => this.setState({startDate: event.target.value})}/>
+                        <InputTime 
+                        type="time"
+                        value={this.state.startTime}
+                        onChange={(event) => this.setState({startTime: event.target.value})}/> 
                     </InputBlock>
                     <label>End:</label>
                     <InputBlock>
-                        <DateTimePicker 
-                        format={"y-MM-dd h:mm:ss"}
-                        value={this.state.end}
-                        onChange={(value) => this.setState({end: value})}/>
+                        <InputTime 
+                        type="date" 
+                        value={this.state.endDate}
+                        onChange={(event) => this.setState({endDate: event.target.value})}/>
+                        <InputTime 
+                        type="time"
+                        value={this.state.endTime}
+                        onChange={(event) => this.setState({endTime: event.target.value})}/> 
                     </InputBlock>
                     <label>Who will participate?</label>
                     <InputBlock>
