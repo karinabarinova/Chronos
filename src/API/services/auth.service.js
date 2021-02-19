@@ -74,7 +74,6 @@ async function register(params, origin) {
 
 async function verifyEmail({ token }, ip) {
     const user = await db.User.findOne({ where: { verificationToken: token } });
-
     if (!user) throw 'Verification failed';
 
     user.verified = Date.now();
@@ -208,6 +207,7 @@ async function createDefaultCalendar(id, name) {
         name,
         description: `${name}'s calendar`,
         color: "#4f9eb8",
+        hide: false,
         canDelete: false,
         canHide: false
     }
@@ -222,7 +222,8 @@ async function createHolidaysCalendar(id, ip) {
         description: `Country Holidays`,
         color: "#86bd33",
         canDelete: true,
-        canHide: true
+        canHide: true,
+        hide: false
     }
     const calendar = await db.Calendar.create(params);
 
@@ -241,7 +242,8 @@ async function createHolidaysCalendar(id, ip) {
             CalendarId: calendar.id,
             defaultDuration: "1 day",
             start: date,
-            end: LastMinuteDate
+            end: LastMinuteDate,
+            color: "#86bd33"
             })
     })
 }

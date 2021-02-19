@@ -42,6 +42,7 @@ async function create(params, creator) {
         ...params,
         canDelete: true,
         canHide: true,
+        hide: false,
         creator
     }
     const exists = await db.Calendar.findOne({ where: {name: fullParams.name}})

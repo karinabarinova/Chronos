@@ -16,7 +16,6 @@ const Calendar = (props) => {
 	}
 
 	const handleEventClick = info => {
-		// console.log(info);
 		props.eventClicked(parseInt(info.event._def.publicId))
 	}
 
@@ -31,7 +30,7 @@ const Calendar = (props) => {
             endTime: '18:00',
         }}
         fixedWeekCount={false}
-        eventColor="#378006"
+        // eventColor="#378006"
         weekNumbers={true}
         weekText="Week #"
         dayHeaders={true}
@@ -45,11 +44,6 @@ const Calendar = (props) => {
           center: "title",
           right: "dayGridMonth,timeGridWeek,timeGridDay"
         }}
-        // footerToolbar={{
-        //     left: "prev,next,today", //"prevYear,prev,next,nextYear,today"
-        //     center: "title",
-        //     right: "dayGridMonth,timeGridWeek,timeGridDay"
-        // }}
         events={props.events}
 		dateClick={handleDateClick}
 		eventClick={handleEventClick}

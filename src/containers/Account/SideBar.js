@@ -18,7 +18,7 @@ const SideBar = (props) => {
             <NewEvent clicked={NewEventClicked}/>
             <div>
             <SidebarTitle>My Calendars</SidebarTitle>
-                <CalendarList calendars={props.calendars} editCalendar={props.editCalendar} />
+                <CalendarList calendars={props.calendars} editCalendar={props.editCalendar} loadNewCalendars={props.loadNewCalendars} />
                 <NewCalendarButton onClick={NewCalendarClicked}>+ Add Calendar</NewCalendarButton>
             </div>
         </SidebarContainer>

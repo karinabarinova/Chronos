@@ -31,6 +31,10 @@ function model(sequelize) {
         canHide: {
             type: DataTypes.BOOLEAN,
             allowNull: false
+        },
+        hide: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
         }
     }
 

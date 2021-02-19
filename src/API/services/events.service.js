@@ -32,7 +32,8 @@ async function create(params, creator, CalendarId) {
             ...params, 
             participants: user.email, 
             CalendarId, 
-            defaultDuration: "1 day" 
+            defaultDuration: "1 day",
+            color: calendar.color 
         })
         if (params.type === "task" || params.type === "reminder") {
             event.requireReminder = true;

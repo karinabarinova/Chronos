@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { Component } from 'react'
+import axios from 'axios'
 import styled from 'styled-components'
 
 const CheckboxContainer = styled.div`
@@ -44,22 +45,47 @@ const StyledCheckbox = styled.div`
   }
 `
 
-const Checkbox = ({ className, canHide, ...props }) => {
-    const [checked, changeChecked] = useState(true);
+// const Checkbox = ({ className, canHide, ...props }) => {
+class Checkbox extends Component {
+
+    state = {
+        checked: true
+    }
+    // const [checked, changeChecked] = useState(true);
 
     // const handleCheckBoxChange = () => {
     //     changeChecked(!checked);
     // }
+    changeChecked = (bool, id) => {
+        this.setState({checked: bool})
 
-    return (
-        <CheckboxContainer className={className} onClick={() => canHide ? changeChecked(!checked) : "return false"}>
-            <HiddenCheckbox checked={checked} {...props} />
-            <StyledCheckbox checked={checked}>
-            <Icon viewBox="0 0 24 24">
-                <polyline points="20 6 9 17 4 12" />
-            </Icon>
-            </StyledCheckbox>
-        </CheckboxContainer>
-)}
+        // const config = {
+        //     headers: {
+        //         'authorization': `Basic ${localStorage.getItem('token')}`
+        //     }
+        // }
+        // const calendar = {
+        //     hide: bool
+        // }
+        // axios.post(`/calendars/${id}/hide`, calendar, config)
+        //     .then(res => {
+        //         this.setState({checked: bool})
+        //         // this.props.loadNewCalendars()
+        //     })
+        //     .catch(e => console.log(e))
+    }
+
+    render() {
+        return (
+            <CheckboxContainer className={this.props.className} onClick={() => this.props.canHide ? this.changeChecked(!this.state.checked, this.props.id) : "return false"}>
+                <HiddenCheckbox checked={this.state.checked} {...this.props} />
+                <StyledCheckbox checked={this.state.checked}>
+                <Icon viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12" />
+                </Icon>
+                </StyledCheckbox>
+            </CheckboxContainer>
+    )
+}}
 
 export default Checkbox

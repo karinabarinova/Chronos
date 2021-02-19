@@ -18,7 +18,7 @@ class CalendarList extends Component {
             list = this.props.calendars.map((calendar) => {
                 return (
                     <div key={calendar.props.id}>
-                            <Checkbox id={calendar.props.id} onChange={this.handleCheckBoxChange} canHide={calendar.props.canHide}/>
+                            <Checkbox id={calendar.props.id} onChange={this.handleCheckBoxChange} canHide={calendar.props.canHide} loadNewCalendars={this.props.loadNewCalendars}/>
                             <span onClick={() => this.editCalendar(calendar.props.id)} style={{marginLeft: 8, cursor: "pointer"}}>{calendar.props.name}</span>
                     </div>
                 )

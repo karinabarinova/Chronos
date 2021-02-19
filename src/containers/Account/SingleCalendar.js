@@ -31,7 +31,6 @@ class SingleCalendar extends Component {
                         this.setState({events: res.data})
                         this.props.copyEvents(res.data)
                     }
-                    // this.props.copyEvents(res.data)
                     this._isUpdated = false;
                 }
             })
