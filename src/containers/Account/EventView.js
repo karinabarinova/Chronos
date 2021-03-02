@@ -52,7 +52,7 @@ class EventView extends Component {
                 .then((res) => {
                     this.props.close()
                     this.props.loadNewCalendars()
-                    this.setState({startDate: ''})
+                    this.setState({startDate: '', title: '', description: ''})
                 })
                 .catch(e => console.log(e))
     }

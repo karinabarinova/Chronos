@@ -33,6 +33,7 @@ class EventEditView extends Component {
     }
 
     loadData() {
+        console.log("loading data")
         const config = {
             headers: {
                 'authorization': `Basic ${localStorage.getItem('token')}`
@@ -53,7 +54,7 @@ class EventEditView extends Component {
     }
 
     eventEditHandler = () => {
-        if (this.state.calendar !== 0) {
+        // if (this.state.calendar !== 0) {
             let start = '';
             start = start.concat(this.state.startDate, " ", this.state.startTime);
             let end = '';
@@ -77,7 +78,7 @@ class EventEditView extends Component {
             //         this.setState({startDate: ''})
             //     })
             //     .catch(e => console.log(e))
-        }
+        // }
     }
 
     eventDeleteHandler = () => {
