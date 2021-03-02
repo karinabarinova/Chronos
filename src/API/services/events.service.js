@@ -50,7 +50,7 @@ async function update(params, id, user) {
     const calendar = await getCalendar(event.CalendarId)
     if (calendar.creator === user) {
         Object.assign(event, params)
-        await user.save();
+        await event.save();
         return event
     }
     throw 'Unauthorized'

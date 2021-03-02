@@ -51,39 +51,36 @@ class EventEditView extends Component {
                     participants: data.participants,
                     startDate: `${start.getFullYear()}-${("0" + (start.getMonth() + 1)).slice(-2)}-${("0" + start.getDate()).slice(-2)}`,
                     startTime: `${("0" + start.getHours()).slice(-2)}:${("0" + start.getMinutes()).slice(-2)}:${("0" + start.getSeconds()).slice(-2)}`,
-                    endDate: end ? `${end.getFullYear()}-${("0" + (end.getMonth() + 1)).slice(-2)}-${("0" + end.getDate()).slice(-2)}` : null,
-                    endTime:  end ? `${("0" + end.getHours()).slice(-2)}:${("0" + end.getMinutes()).slice(-2)}:${("0" + end.getSeconds()).slice(-2)}` : null
+                    endDate: end ? `${end.getFullYear()}-${("0" + (end.getMonth() + 1)).slice(-2)}-${("0" + end.getDate()).slice(-2)}` : '',
+                    endTime:  end ? `${("0" + end.getHours()).slice(-2)}:${("0" + end.getMinutes()).slice(-2)}:${("0" + end.getSeconds()).slice(-2)}` : ''
                 })
             })
             .catch(e => console.log(e))
     }
 
     eventEditHandler = () => {
-        // if (this.state.calendar !== 0) {
-            let start = '';
-            start = start.concat(this.state.startDate, " ", this.state.startTime);
-            let end = '';
-            if (this.state.endTime)
-                end = end.concat(this.state.endDate, " ", this.state.endTime)
-            const event = {
-                title: this.state.title,
-                description: this.state.description,
-                type: this.state.type,
-                start,
-                end,
-                participants: this.state.participants
-            }
-    
-            // axios.patch(`/events/${this.props.id}`, event, {headers: {
-            //     'authorization': `Basic ${localStorage.getItem('token')}`
-            // }})
-            //     .then((res) => {
-            //         this.props.close()
-            //         this.props.loadNewCalendars()
-            //         this.setState({startDate: ''})
-            //     })
-            //     .catch(e => console.log(e))
-        // }
+        let start = '';
+        start = start.concat(this.state.startDate, " ", this.state.startTime);
+        let end = '';
+        if (this.state.endTime)
+            end = end.concat(this.state.endDate, " ", this.state.endTime)
+        const event = {
+            title: this.state.title,
+            description: this.state.description,
+            type: this.state.type,
+            start,
+            end,
+            participants: this.state.participants
+        }
+        axios.patch(`/events/${this.props.id}`, event, {headers: {
+                    'authorization': `Basic ${localStorage.getItem('token')}`
+            }})
+                .then((res) => {
+                    this.props.close()
+                    this.props.loadNewCalendars()
+                    this.setState({startDate: '', title: '', description: '', participants: '', startTime: '', endDate: '', endTime: ''})
+                })
+                .catch(e => console.log(e))
     }
 
     eventDeleteHandler = () => {
