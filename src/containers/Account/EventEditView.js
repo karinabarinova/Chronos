@@ -33,7 +33,6 @@ class EventEditView extends Component {
     }
 
     loadData() {
-        console.log("loading data")
         const config = {
             headers: {
                 'authorization': `Basic ${localStorage.getItem('token')}`
@@ -41,13 +40,19 @@ class EventEditView extends Component {
         }
         axios.get(`/events/${this.props.id}`, config)
             .then(({data}) => {
+                let start = new Date(data.start)
+                let end = null;
+                if (data.end)
+                    end = new Date(data.end)
                 this.setState({
                     id: this.props.id,
                     title: data.title,
                     description: data.description,
                     participants: data.participants,
-                    // startDate: data.start,
-                    // endDate: data.end
+                    startDate: `${start.getFullYear()}-${("0" + (start.getMonth() + 1)).slice(-2)}-${("0" + start.getDate()).slice(-2)}`,
+                    startTime: `${("0" + start.getHours()).slice(-2)}:${("0" + start.getMinutes()).slice(-2)}:${("0" + start.getSeconds()).slice(-2)}`,
+                    endDate: end ? `${end.getFullYear()}-${("0" + (end.getMonth() + 1)).slice(-2)}-${("0" + end.getDate()).slice(-2)}` : null,
+                    endTime:  end ? `${("0" + end.getHours()).slice(-2)}:${("0" + end.getMinutes()).slice(-2)}:${("0" + end.getSeconds()).slice(-2)}` : null
                 })
             })
             .catch(e => console.log(e))
