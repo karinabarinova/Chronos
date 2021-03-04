@@ -27,7 +27,7 @@ class Login extends Component {
         let authRedirect = null;
         let error = null;
         if (this.props.isAuthenticated && !authRedirect)
-            authRedirect = <Redirect to="/" />
+            authRedirect = <Redirect to="/account" />
         if (this.props.error)
             error = this.props.error
     
