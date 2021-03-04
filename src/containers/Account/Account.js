@@ -179,8 +179,8 @@ class Account extends Component {
                     {this.state.calendarsUpdated ? <CalendarView close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} /> : null}
                     {this.state.eventEditInfo ? <EventEditView  id={this.state.editingEvent} close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} editEvent={this.editEvent}/> : null}
                     {this.state.calendarEditInfo ? <CalendarEditView id={this.state.editingCalendar} close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} /> : null}
-                    {calendars}
                 </Modal>
+                <Modal show={false}>{calendars}</Modal>
                 <ParentCalendarContainer>
                     <SideBar calendars={calendars} newcal={this.createCalendarHandler} clicked={this.createEventHandler} editCalendar={this.editCalendarHandler} loadNewCalendars={this.loadNewCalendars}/>
                     <CalendarContainer>
