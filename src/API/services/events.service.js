@@ -1,5 +1,5 @@
 const db = require('../helpers/db');
-const updatedEvent = require('../helpers/newEvent');
+const sendNotification = require('../helpers/newEvent');
 
 module.exports = {
     getAll,
@@ -39,8 +39,9 @@ async function create(params, creator, CalendarId) {
         if (params.type === "task" || params.type === "reminder") {
             event.requireReminder = true;
             event.reminderSent = false;
-            await event.save()
         }
+        await event.save()
+        await sendNotification.sendNewEmail(event)
         return event;
     }
     throw 'Unauthorized'
@@ -52,7 +53,7 @@ async function update(params, id, user) {
     if (calendar.creator === user) {
         Object.assign(event, params)
         await event.save();
-        updatedEvent(event)
+        await sendNotification.sendUpdatedEmail(event)
 
         return event
     }
