@@ -1,4 +1,5 @@
 const db = require('../helpers/db');
+const updatedEvent = require('../helpers/newEvent');
 
 module.exports = {
     getAll,
@@ -51,6 +52,8 @@ async function update(params, id, user) {
     if (calendar.creator === user) {
         Object.assign(event, params)
         await event.save();
+        updatedEvent(event)
+
         return event
     }
     throw 'Unauthorized'
