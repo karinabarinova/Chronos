@@ -126,6 +126,20 @@ class Account extends Component {
         })//TO DO: filter duplicate events
     }
 
+    editEvent = (eventEdited, id) => {
+        const newEvents = this.state.events.slice();
+        newEvents.map(event => {
+            if (event.id === id) {
+                event.title = eventEdited.title
+                event.description = eventEdited.description
+                event.start = eventEdited.start
+                event.end = eventEdited.end
+                event.participants = eventEdited.participants
+            }
+        })
+        this.setState({events: newEvents})
+    }
+
     loadNewCalendars = () => {
         this.setState({loadNewCalendars: true})
     }
@@ -163,7 +177,7 @@ class Account extends Component {
                     <EventView close={this.createCancelHander} calendars={this.state.calendars} loadNewCalendars={this.loadNewCalendars} date={this.state.dateClickedDate}/> 
                     : null}
                     {this.state.calendarsUpdated ? <CalendarView close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} /> : null}
-                    {this.state.eventEditInfo ? <EventEditView  id={this.state.editingEvent} close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars}/> : null}
+                    {this.state.eventEditInfo ? <EventEditView  id={this.state.editingEvent} close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} editEvent={this.editEvent}/> : null}
                     {this.state.calendarEditInfo ? <CalendarEditView id={this.state.editingCalendar} close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} /> : null}
                     {calendars}
                 </Modal>

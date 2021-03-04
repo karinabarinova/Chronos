@@ -76,9 +76,10 @@ class EventEditView extends Component {
                     'authorization': `Basic ${localStorage.getItem('token')}`
             }})
                 .then((res) => {
+                    this.setState({startDate: '', title: '', description: '', participants: '', startTime: '', endDate: '', endTime: ''})
                     this.props.close()
                     this.props.loadNewCalendars()
-                    this.setState({startDate: '', title: '', description: '', participants: '', startTime: '', endDate: '', endTime: ''})
+                    this.props.editEvent(event, this.state.id)
                 })
                 .catch(e => console.log(e))
     }
