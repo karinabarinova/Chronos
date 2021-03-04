@@ -30,7 +30,6 @@ const Calendar = (props) => {
             endTime: '18:00',
         }}
         fixedWeekCount={false}
-        // eventColor="#378006"
         weekNumbers={true}
         weekText="Week #"
         dayHeaders={true}
