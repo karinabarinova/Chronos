@@ -6,7 +6,7 @@ async function sendNotificationEmail(event) {
                     <p>It will start in less than 20 minutes</p>`
 
     await sendEmail({
-        to: event.participants,
+        to: event.participants.split(' '),
         subject: 'Chronos Notification - Upcoming Event',
         html: `<h4>Upcoming event: ${event.title}</h4>
                ${message}`
