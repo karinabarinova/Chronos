@@ -31,11 +31,11 @@ async function create(params, creator, CalendarId) {
         const user = await db.User.findByPk(creator);
         const event = await db.Events.create({ 
             ...params, 
-            participants: user.email, 
             CalendarId, 
             defaultDuration: "1 day",
             color: calendar.color 
         })
+        event.participants.concat(' ', user.email)
         if (params.type === "task" || params.type === "reminder") {
             event.requireReminder = true;
             event.reminderSent = false;
@@ -53,7 +53,8 @@ async function update(params, id, user) {
     if (calendar.creator === user) {
         Object.assign(event, params)
         await event.save();
-        await sendNotification.sendUpdatedEmail(event)
+        if (event.participants)
+            await sendNotification.sendUpdatedEmail(event)
 
         return event
     }

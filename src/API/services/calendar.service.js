@@ -1,4 +1,5 @@
 const db = require('../helpers/db');
+const sendNotification = require('../helpers/newEvent');
 
 module.exports = {
     getAll,
@@ -20,23 +21,6 @@ async function getById(id, creator) {
     throw 'Calendar not found'
 }
 
-// async function getAllEvents(id) {
-//     await getCalendar(id)
-//     const events = await db.Calendar.findAll({ 
-//         where: {id},
-//         attributes: [],
-//         include: [{
-//             model: db.Events,
-//             as: 'events',
-//             through: {
-//                 attributes: []
-//             }
-//         }]
-//     })
-//     // console.log(posts[0].posts)
-//     return events[0].events
-// }
-
 async function create(params, creator) {
     const fullParams = {
         ...params,
@@ -48,6 +32,8 @@ async function create(params, creator) {
     const exists = await db.Calendar.findOne({ where: {name: fullParams.name}})
     if (exists)
         throw 'Calendar already exists'
+    if (fullParams.participants)
+        sendNotification.sendNewCalendar(fullParams);
     return await db.Calendar.create(fullParams);
 }
 
