@@ -52,12 +52,12 @@ class CalendarEditView extends Component {
                     id: this.props.id,
                     name: data.name,
                     description: data.description,
-                    participants: data.participants, //error when participants on server is null
+                    participants: data.participants,
                     color: data.color,
                     canDelete: data.canDelete
                 })
             })
-            .catch(e => console.log(e))
+            .catch(e => this.props.catchError())
     }
 
     calendarEditHandler = () => {
@@ -77,7 +77,7 @@ class CalendarEditView extends Component {
                     this.props.loadNewCalendars()
                     this.props.close()
                 })
-                .catch(e => console.log(e))
+                .catch(e => this.props.catchError())
         }
     }
 
@@ -92,7 +92,7 @@ class CalendarEditView extends Component {
                 this.props.loadNewCalendars()
                 this.props.close()
             })
-            .catch(e => console.log(e))
+            .catch(e => this.props.catchError())
     }
 
     render() {

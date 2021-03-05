@@ -124,6 +124,10 @@ class Account extends Component {
         })
     }
 
+    catchError = () => {
+        this.setState({error: true})
+    }
+
     copyEvents = (newEvents) => {
         this.setState({
             events: this.state.events.concat(newEvents)
@@ -190,7 +194,7 @@ class Account extends Component {
                     : null}
                     {this.state.calendarsUpdated ? <CalendarView close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} /> : null}
                     {this.state.eventEditInfo ? <EventEditView  id={this.state.editingEvent} close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} editEvent={this.editEvent}/> : null}
-                    {this.state.calendarEditInfo ? <CalendarEditView id={this.state.editingCalendar} close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} /> : null}
+                    {this.state.calendarEditInfo ? <CalendarEditView id={this.state.editingCalendar} close={this.createCancelHander} loadNewCalendars={this.loadNewCalendars} catchError={this.catchError}/> : null}
                 </Modal>
                 <Modal show={false}>{calendars}</Modal>
                 <ParentCalendarContainer>
