@@ -16,7 +16,6 @@ export const TextContainer = styled.div`
 `;
 
 export const InputBlock = styled.div`
-    padding-bottom: 8px;
     margin-bottom: 8px;
     margin-top: 8px;
 `;
