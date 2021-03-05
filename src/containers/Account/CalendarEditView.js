@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {checkForm} from '../../components/Forms/checkForm'
+import {Error} from '../../components/Forms/Form.elements'
+
 import {
     TextContainer,
     Container, 
@@ -20,7 +23,11 @@ class CalendarEditView extends Component {
         description: '',
         color: '',
         participants: '',
-        canDelete: false
+        canDelete: false,
+        errors: {
+            name: '',
+            description: ''
+        }
     }
 
     componentDidUpdate() {
@@ -59,15 +66,18 @@ class CalendarEditView extends Component {
             color: this.state.color,
             participants: this.state.participants
         };
-    
-        axios.patch(`/calendars/${this.props.id}`, calendar, {headers: {
-            'authorization': `Basic ${localStorage.getItem('token')}`
-        }})
-            .then((res) => {
-                this.props.loadNewCalendars()
-                this.props.close()
-            })
-            .catch(e => console.log(e))
+
+        this.setState({...this.state, errors: checkForm(calendar, "calendar")});
+        if (this.state.errors && Object.keys(this.state.errors).length === 0 && this.state.errors.constructor === Object) {
+            axios.patch(`/calendars/${this.props.id}`, calendar, {headers: {
+                'authorization': `Basic ${localStorage.getItem('token')}`
+            }})
+                .then((res) => {
+                    this.props.loadNewCalendars()
+                    this.props.close()
+                })
+                .catch(e => console.log(e))
+        }
     }
 
     calendarDeleteHandler = () => {
@@ -99,6 +109,7 @@ class CalendarEditView extends Component {
                         onChange={(event) => this.setState({name: event.target.value})}
                         />
                     </InputBlock>
+                    {this.state.errors.name && <Error>{this.state.errors.name}</Error>}
                     <label>Description</label>
                     <InputBlockFlex>
                     <InputBlock>
@@ -116,6 +127,7 @@ class CalendarEditView extends Component {
                         />
                     </InputBlock>
                     </InputBlockFlex>
+                    {this.state.errors.description && <Error>{this.state.errors.description}</Error>}
                     <label>Who will participate?</label>
                     <InputBlock>
                         <Input 
