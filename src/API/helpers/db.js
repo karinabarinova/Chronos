@@ -1,7 +1,6 @@
 const config = require('../config.json')
 const mysql = require('mysql2/promise')
 const { Sequelize } = require('sequelize');
-// const create = require('../middleware/createInfo')
 
 module.exports = db = {}
 
@@ -11,7 +10,7 @@ async function initialize() {
     //create db  if doesn't exist
     const { host, port, user, password, database } = config.database
     const connection = await mysql.createConnection({host, port, user, password})
-    await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`)
+    await connection.query(`CREATE DATABASE IF NOT EXISTS ??`, [database])
 
     //connect to db
     const sequelize = new Sequelize(database, user, password, {dialect: 'mysql', logging: console.log})
@@ -63,8 +62,5 @@ async function initialize() {
     
     //sync all models with database
     await sequelize.sync()
-    // await create.userInfo(db.User)
-    // await create.postInfo(db.Post, db.Category)
-    // await create.commentInfo(db.Comment)
-    // await create.likeInfo(db.Like, db.Comment, db.Post, db.User)
+
 }
