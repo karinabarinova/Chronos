@@ -37,7 +37,6 @@ class CalendarView extends Component {
         };
 
         this.setState({...this.state, errors: checkForm(calendar, "calendar")});
-        console.log(this.state.errors)
         if (this.state.errors && Object.keys(this.state.errors).length === 0 && this.state.errors.constructor === Object) {
             axios.post(`/calendars/`, calendar, {headers: {
             'authorization': `Basic ${localStorage.getItem('token')}`

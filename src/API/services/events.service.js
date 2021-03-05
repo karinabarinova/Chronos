@@ -29,13 +29,20 @@ async function create(params, creator, CalendarId) {
     const calendar = await getCalendar(CalendarId)
     if (calendar && calendar.creator === creator) {
         const user = await db.User.findByPk(creator);
+        let participants = "";
+
+        if (params.participants)
+            participants = `${user.email} ${params.participants}`
+        else
+            participants = String(user.email)
         const event = await db.Events.create({ 
             ...params, 
+            participants,
             CalendarId, 
             defaultDuration: "1 day",
             color: calendar.color 
         })
-        event.participants.concat(' ', user.email)
+        
         if (params.type === "task" || params.type === "reminder") {
             event.requireReminder = true;
             event.reminderSent = false;

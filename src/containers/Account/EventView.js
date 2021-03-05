@@ -48,6 +48,7 @@ class EventView extends Component {
             let end = '';
             if (this.state.endTime)
                 end = end.concat(this.state.endDate, " ", this.state.endTime)
+                
             const event = {
                 title: this.state.title,
                 description: this.state.description,
@@ -152,7 +153,7 @@ class EventView extends Component {
                         type="text" 
                         value={this.state.participants}
                         placeholder="e.g.: carlos@carlos.com" 
-                        onChange={(event) => this.setState({participants: event.target.values})}
+                        onChange={(event) => this.setState({participants: event.target.value})}
                         />
                     </InputBlock>
                     {this.state.errors.participants && <Error>{this.state.errors.participants}</Error>}

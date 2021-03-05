@@ -35,6 +35,11 @@ function model(sequelize) {
         hide: {
             type: DataTypes.BOOLEAN,
             allowNull: false
+        },
+        participants: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            defaultValue: ''
         }
     }
 

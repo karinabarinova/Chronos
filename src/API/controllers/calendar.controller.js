@@ -62,7 +62,8 @@ function createSchemaEvent(req, res, next) {
         type: Joi.string().empty().valid('arrangement', 'task', 'reminder').required(),
         description: Joi.string().empty(''),
         start: Joi.string().empty('').required(),
-        end: Joi.string().empty('')
+        end: Joi.string().empty(''),
+        participants: Joi.string().empty('')
     })
     validateRequest(req, next, schema)
 }
