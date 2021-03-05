@@ -38,11 +38,9 @@ async function create(params, creator) {
 }
 
 async function update(params, id, creator) {
-    const exists = await db.Calendar.findOne({ where: {name: params.name}})
-    if (exists)
-        throw 'Calendar already exists'
     const calendar = await getCalendar(id);
-
+    console.log(calendar)
+    console.log(params)
     if (calendar.creator === creator) {
         Object.assign(calendar, params);
         await calendar.save();
