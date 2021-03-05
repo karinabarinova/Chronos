@@ -24,7 +24,6 @@ class CalendarView extends Component {
         errors: {
             name: '',
             description: '',
-            participants: ''
         }
     }
 
