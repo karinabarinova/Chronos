@@ -26,7 +26,8 @@ class CalendarEditView extends Component {
         canDelete: false,
         errors: {
             name: '',
-            description: ''
+            description: '',
+            participants: ''
         }
     }
 
@@ -136,6 +137,7 @@ class CalendarEditView extends Component {
                         onChange={(event) => this.setState({participants: event.target.values})}
                         />
                     </InputBlock>
+                    {this.state.errors.participants && <Error>{this.state.errors.participants}</Error>}
                     <Button onClick={this.calendarEditHandler} danger={false}>Update</Button>
                     {this.state.canDelete ? <Button onClick={this.calendarDeleteHandler} danger={true}>Delete</Button> : null}
             </Container>

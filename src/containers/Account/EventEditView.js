@@ -27,7 +27,8 @@ class EventEditView extends Component {
             title: '',
             description: '',
             start: '',
-            end: ''
+            end: '',
+            participants: ''
         }
     }
 
@@ -165,6 +166,7 @@ class EventEditView extends Component {
                         onChange={(event) => this.setState({participants: event.target.values})}
                         />
                     </InputBlock>
+                    {this.state.errors.participants && <Error>{this.state.errors.participants}</Error>}
                     <Button onClick={this.eventEditHandler} danger={false}>Update</Button>
                     <Button onClick={this.eventDeleteHandler} danger={true}>Delete</Button>
             </Container>

@@ -32,7 +32,8 @@ class EventView extends Component {
             description: '',
             start: '',
             end: '',
-            type: ''
+            type: '',
+            participants: ''
         }
     }
 
@@ -154,6 +155,7 @@ class EventView extends Component {
                         onChange={(event) => this.setState({participants: event.target.values})}
                         />
                     </InputBlock>
+                    {this.state.errors.participants && <Error>{this.state.errors.participants}</Error>}
                     <Button onClick={this.eventCreateHandler}>Submit</Button>
             </Container>
         )
