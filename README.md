@@ -46,7 +46,14 @@ My challenge was to create the service called chronos that helps organize meetin
 ```
 
 #screenshots
-![Alt text](/src/images/img1.png?raw=true "Optional Title")
+![Alt text](/src/images/img1.png?raw=true "Product Page Home")
+![Alt text](/src/images/img2.png?raw=true "Product Page Services")
+![Alt text](/src/images/img3.png?raw=true "Product Page Products")
+![Alt text](/src/images/img4.png?raw=true "Product Page Prices")
+![Alt text](/src/images/img5.png?raw=true "Optional Footer")
+![Alt text](/src/images/img6.png?raw=true "Login Page")
+![Alt text](/src/images/img7.png?raw=true "Calendar Account Page")
+![Alt text](/src/images/img8.png?raw=true "New Event Form")
 
 
 #dependencies:<br/>
