@@ -20,21 +20,21 @@ const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 axios.defaults.baseURL = 'http://localhost:3001/api';
 
-axios.interceptors.request.use(req => {
-	console.log(req);
-  	return req;
-}, error => {
-	  console.log(error);
-	  return Promise.reject(error);
-})
+// axios.interceptors.request.use(req => {
+// 	console.log(req);
+//   	return req;
+// }, error => {
+// 	  console.log(error);
+// 	  return Promise.reject(error);
+// })
 
-axios.interceptors.response.use(req => {
-	console.log(req);
-	return req;
-}, error => {
-	console.log(error);
-	return Promise.reject(error);
-})
+// axios.interceptors.response.use(req => {
+// 	console.log(req);
+// 	return req;
+// }, error => {
+// 	console.log(error);
+// 	return Promise.reject(error);
+// })
 
 ReactDOM.render(
 	<Provider store={store}>
