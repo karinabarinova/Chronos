@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {checkForm} from '../../components/Forms/checkForm'
+import {Error} from '../../components/Forms/Form.elements'
 import {
     TextContainer,
     Container, 
@@ -20,7 +22,13 @@ class EventEditView extends Component {
         startTime: '',
         endDate: '',
         endTime: '',
-        participants: ''
+        participants: '',
+        errors: {
+            title: '',
+            description: '',
+            start: '',
+            end: ''
+        }
     }
 
     componentDidUpdate() {
@@ -72,16 +80,20 @@ class EventEditView extends Component {
             end,
             participants: this.state.participants
         }
-        axios.patch(`/events/${this.props.id}`, event, {headers: {
-                    'authorization': `Basic ${localStorage.getItem('token')}`
-            }})
-                .then((res) => {
-                    this.setState({startDate: '', title: '', description: '', participants: '', startTime: '', endDate: '', endTime: ''})
-                    this.props.close()
-                    this.props.loadNewCalendars()
-                    this.props.editEvent(event, this.state.id)
-                })
-                .catch(e => console.log(e))
+
+        this.setState({...this.state, errors: checkForm(event, "event")});
+        if (this.state.errors && Object.keys(this.state.errors).length === 0 && this.state.errors.constructor === Object) {    
+            axios.patch(`/events/${this.props.id}`, event, {headers: {
+                        'authorization': `Basic ${localStorage.getItem('token')}`
+                }})
+                    .then((res) => {
+                        this.setState({startDate: '', title: '', description: '', participants: '', startTime: '', endDate: '', endTime: ''})
+                        this.props.close()
+                        this.props.loadNewCalendars()
+                        this.props.editEvent(event, this.state.id)
+                    })
+                    .catch(e => console.log(e))
+        }
     }
 
     eventDeleteHandler = () => {
@@ -112,6 +124,7 @@ class EventEditView extends Component {
                         onChange={(event) => this.setState({title: event.target.value})}
                         />
                     </InputBlock>
+                    {this.state.errors.title && <Error>{this.state.errors.title}</Error>}
                     <InputBlock>
                         <Input 
                         type="text" 
@@ -119,6 +132,7 @@ class EventEditView extends Component {
                         onChange={(event) => this.setState({description: event.target.value})}
                         />
                     </InputBlock>
+                    {this.state.errors.description && <Error>{this.state.errors.description}</Error>}
                     <label>Start:</label>
                     <InputBlock>
                         <InputTime 
@@ -130,6 +144,7 @@ class EventEditView extends Component {
                         value={this.state.startTime}
                         onChange={(event) => this.setState({startTime: event.target.value})}/> 
                     </InputBlock>
+                    {this.state.errors.start && <Error>{this.state.errors.start}</Error>}
                     <label>End:</label>
                     <InputBlock>
                         <InputTime 
@@ -141,6 +156,7 @@ class EventEditView extends Component {
                         value={this.state.endTime}
                         onChange={(event) => this.setState({endTime: event.target.value})}/> 
                     </InputBlock>
+                    {this.state.errors.end && <Error>{this.state.errors.end}</Error>}
                     <label>Who will participate?</label>
                     <InputBlock>
                         <Input 
