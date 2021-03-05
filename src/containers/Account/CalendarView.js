@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import {checkForm} from '../../components/Forms/checkForm'
 import {
     TextContainer,
     Container, 
@@ -10,6 +11,7 @@ import {
     InputBlock,
     CloseButton
 } from './EventView.elements.js'
+import {Error} from '../../components/Forms/Form.elements'
 
 import { Button } from './NewEvent.elements';
 
@@ -18,7 +20,12 @@ class CalendarView extends Component {
         name: '',
         description: '',
         color: '#1db58f',
-        participants: ''
+        participants: '',
+        errors: {
+            name: '',
+            description: '',
+            participants: ''
+        }
     }
 
     calendarCreateHandler = () => {
@@ -28,15 +35,19 @@ class CalendarView extends Component {
             color: this.state.color,
             participants: this.state.participants
         };
-    
-        axios.post(`/calendars/`, calendar, {headers: {
+
+        this.setState({...this.state, errors: checkForm(calendar, "calendar")});
+
+        if (this.state.errors && Object.keys(this.state.errors).length === 0 && this.state.errors.constructor === Object) {
+            axios.post(`/calendars/`, calendar, {headers: {
             'authorization': `Basic ${localStorage.getItem('token')}`
-        }})
-            .then((res) => {
-                this.props.loadNewCalendars()
-                this.props.close()
-            })
-            .catch(e => console.log(e))
+            }})
+                .then((res) => {
+                    this.props.loadNewCalendars()
+                    this.props.close()
+                })
+                .catch(e => console.log(e))
+        }        
     }
 
     render() {
@@ -54,6 +65,7 @@ class CalendarView extends Component {
                         onChange={(event) => this.setState({name: event.target.value})}
                         placeholder="e.g.: Work" />
                     </InputBlock>
+                    {this.state.errors.name && <Error>{this.state.errors.name}</Error>}
                     <label>Description</label>
                     <InputBlockFlex>
                     <InputBlock>
@@ -70,7 +82,10 @@ class CalendarView extends Component {
                         onChange={(event) => this.setState({color: event.target.value})}
                         />
                     </InputBlock>
+
                     </InputBlockFlex>
+                    {this.state.errors.description && <Error>{this.state.errors.description}</Error>}
+
                     <label>Who will participate?</label>
                     <InputBlock>
                         <Input 
