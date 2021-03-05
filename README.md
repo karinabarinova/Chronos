@@ -41,8 +41,13 @@ My challenge was to create the service called chronos that helps organize meetin
 ```
 #usage:
 ```md
-> node server
+> node index
+> npm start
 ```
+
+#screenshots
+![Alt text](/src/images/img1.png?raw=true "Optional Title")
+
 
 #dependencies:<br/>
 ```md
