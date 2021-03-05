@@ -128,6 +128,13 @@ class Account extends Component {
         this.setState({
             events: this.state.events.concat(newEvents)
         })//TO DO: filter duplicate events
+        let events = [...this.state.events]
+        let uniqueEvents = []
+        events.forEach(event => {
+            if (!uniqueEvents.includes(event))
+                uniqueEvents.push(event)
+        })
+        this.setState({events: uniqueEvents})
     }
 
     editEvent = (eventEdited, id) => {

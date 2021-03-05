@@ -37,9 +37,11 @@ class EventView extends Component {
         }
     }
 
-    componentDidMount() {
-        if (this.props.date)
-            this.setState({startDate: this.props.date})
+    static getDerivedStateFromProps(nextProps, prevProps) {
+        if (nextProps.date !== prevProps.date) {
+            return { startDate: nextProps.date}
+        }
+        else return null
     }
 
     eventCreateHandler = () => {

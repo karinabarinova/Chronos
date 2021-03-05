@@ -27,7 +27,7 @@ export function checkForm(values, type) {
             errors.start = "Start time required"
         if (values.start && (!Object.prototype.toString.call(new Date(values.start)) === "[object Date]" || !isNaN(values.start)))
             errors.start = "Start date is required"
-        if (values.end && (!Object.prototype.toString.call(new Date(values.end)) === "[object Date]" || isNaN(values.end)))
+        if (values.end && (!Object.prototype.toString.call(new Date(values.end)) === "[object Date]" || !isNaN(values.end)))
             errors.end = "End date is required"
         if (!values.title.trim())
             errors.title = "Title required"
