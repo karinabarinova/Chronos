@@ -39,8 +39,6 @@ async function create(params, creator) {
 
 async function update(params, id, creator) {
     const calendar = await getCalendar(id);
-    console.log(calendar)
-    console.log(params)
     if (calendar.creator === creator) {
         Object.assign(calendar, params);
         await calendar.save();
