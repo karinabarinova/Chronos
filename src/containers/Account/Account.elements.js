@@ -37,3 +37,10 @@ export const ParentCalendarContainer = styled.div`
     display: flex;
     /* height: 100vh; */
 `;
+
+export const ErrorContainer = styled.div`
+    width: 90vw;
+    margin: 20px auto;
+    text-align: center;
+    color: #101522;
+`

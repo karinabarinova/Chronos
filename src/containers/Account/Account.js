@@ -4,7 +4,8 @@ import axios from 'axios'
 import { 
     CalendarContainer,
     AccountContainer,
-    ParentCalendarContainer
+    ParentCalendarContainer,
+    ErrorContainer
 } from './Account.elements'
 import { Calendar, Modal } from '../../components'
 import SideBar from './SideBar';
@@ -28,7 +29,8 @@ class Account extends Component {
         eventEditInfo: false,
         editingEvent: null,
         calendarEditInfo: false,
-        editingCalendar: null
+        editingCalendar: null,
+        error: false
     }
 
     componentDidUpdate() {
@@ -59,11 +61,12 @@ class Account extends Component {
                         editingEvent: null, 
                         editingCalendar: null,
                         eventEditInfo: false,
-                        calendarEditInfo: false 
+                        calendarEditInfo: false,
+                        error: false 
                     })
                 }
             })
-            .catch(e => console.log(e))
+            .catch(e => this.setState({...this.state, error: true}))
     }
     componentWillUnmount() {
         this._isMounted = false
@@ -78,6 +81,7 @@ class Account extends Component {
             calendarEditInfo: false,
         })
     }
+    
     editEventHandler = (id) => {
         this.setState({ 
             creatingMode: true, 
@@ -172,6 +176,7 @@ class Account extends Component {
 
         return (
             <AccountContainer>
+                { this.state.error ? <ErrorContainer><h3>Something went wrong. Please try again</h3></ErrorContainer> : null}
                 <Modal show={this.state.creatingMode} modalClosed={this.createCancelHander}>
                     {this.state.eventsUpdated ? 
                     <EventView close={this.createCancelHander} calendars={this.state.calendars} loadNewCalendars={this.loadNewCalendars} date={this.state.dateClickedDate}/> 
